@@ -1,4 +1,4 @@
-import resolve from "@rollup/plugin-node-resolve"
+import resolve from "@rollup/plugin-node-resolve";
 
 export default {
   input: "app/javascript/application.js",
@@ -6,9 +6,7 @@ export default {
     file: "app/assets/builds/application.js",
     format: "esm",
     inlineDynamicImports: true,
-    sourcemap: true
+    sourcemap: true,
   },
-  plugins: [
-    resolve()
-  ]
-}
+  plugins: [resolve()],
+};
