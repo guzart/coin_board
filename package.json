@@ -20,9 +20,15 @@
     "build:css:compile": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
     "build:css:prefix": "postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css",
     "build:css": "yarn build:css:compile && yarn build:css:prefix",
+    "lint": "prettier --check --ignore-path .gitignore --config .prettierrc.json \"**/*.{rb,html,scss,css,js,json,yml}\"",
+    "lint:fix": "prettier --write --ignore-path .gitignore --config .prettierrc.json \"**/*.{rb,html,scss,css,js,json,yml}\"",
     "watch:css": "nodemon --watch ./app/assets/stylesheets/ --ext scss --exec \"yarn build:css\""
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "devDependencies": {
+    "@prettier/plugin-ruby": "^4.0.4",
+    "prettier": "^3.2.5"
+  }
 }
