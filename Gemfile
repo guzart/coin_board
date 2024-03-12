@@ -49,6 +49,8 @@ gem "bootsnap", require: false
 
 gem "devise", "~> 4.9"
 gem "slim-rails"
+gem "view_component"
+gem "dry-initializer"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -12,9 +12,9 @@ html
   body
 
     - if notice
-      .alert.alert-info[role="alert"] = notice
+      = render AlertComponent.new(notice, variant: :info)
     - if alert
-      .alert.alert-danger[role="alert"] = alert
+      = render AlertComponent.new(alert, variant: :warning)
 
     - if current_user
       = link_to 'Me', user_path(current_user)
