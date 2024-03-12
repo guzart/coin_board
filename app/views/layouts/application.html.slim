@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title CoinBoard
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+
+  body
+
+    - if notice
+      .alert.alert-info[role="alert"] = notice
+    - if alert
+      .alert.alert-danger[role="alert"] = alert
+
+    - if current_user
+      = link_to 'Me', user_path(current_user)
+      = link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }
+    - elsif !devise_controller?
+      = link_to 'Sign in', new_user_session_path
+
+    = yield
