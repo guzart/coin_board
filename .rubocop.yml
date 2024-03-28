@@ -1,5 +1,7 @@
 AllCops:
-  TargetRubyVersion: 3.3
+  TargetRubyVersion: 3.3.0
+  Exclude:
+    - "db/migrate/*.rb"
 
 Style/FrozenStringLiteralComment:
   Enabled: false
