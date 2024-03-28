@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_28_022726) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_28_035322) do
+  create_table "mailbox_senders", force: :cascade do |t|
+    t.integer "mailbox_id", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.boolean "allowed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_mailbox_senders_on_email"
+    t.index ["mailbox_id"], name: "index_mailbox_senders_on_mailbox_id"
+  end
+
   create_table "mailboxes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "email", null: false
@@ -46,5 +57,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_022726) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "mailbox_senders", "mailboxes"
   add_foreign_key "mailboxes", "users"
 end

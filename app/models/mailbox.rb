@@ -19,6 +19,7 @@
 #
 class Mailbox < ApplicationRecord
   belongs_to :user
+  has_many :mailbox_senders, dependent: :destroy
 
   before_validation :generate_email
 

@@ -2,3 +2,8 @@ p
   | Send your bank email notifications to:
   br
   strong = @mailbox.email
+
+- if @mailbox.mailbox_senders.empty?
+  p
+    => icon(:spinner, animate: :spin_pulse)
+    | Waiting for notifications emails from your bank.
