@@ -48,3 +48,6 @@
 /.yarn/install-state.gz
 .pnp.cjs
 .pnp.loader.mjs
+
+
+.DS_Store
