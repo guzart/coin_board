@@ -40,4 +40,14 @@ class User < ApplicationRecord
          :timeoutable,
          :trackable,
          :validatable
+
+  has_one :mailbox, dependent: :destroy
+
+  after_create :create_mailbox
+
+  private
+
+  def create_mailbox
+    build_mailbox.save!
+  end
 end

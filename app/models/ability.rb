@@ -30,5 +30,6 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
 
     can :manage, User, id: user.id
+    can :manage, Mailbox, user:
   end
 end

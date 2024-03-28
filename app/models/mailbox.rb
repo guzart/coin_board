@@ -20,5 +20,16 @@
 class Mailbox < ApplicationRecord
   belongs_to :user
 
+  before_validation :generate_email
+
   validates :email, uniqueness: true, presence: true
+
+  private
+
+  def generate_email
+    return unless email.blank?
+
+    email_template = ENV.fetch("MAILBOX_EMAIL_TEMPLATE")
+    self.email = email_template.gsub("{code}", SecureRandom.hex(10))
+  end
 end
