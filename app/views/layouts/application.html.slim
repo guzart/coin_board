@@ -17,8 +17,9 @@ html
       = render AlertComponent.new(alert, variant: :warning)
 
     - if current_user
-      = link_to 'Me', user_path(current_user)
-      = link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }
+      ul.list-inline
+        li.list-inline-item = link_to 'Me', user_path(current_user)
+        li.list-inline-item = link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }
     - elsif !devise_controller?
       = link_to 'Sign in', new_user_session_path
 
