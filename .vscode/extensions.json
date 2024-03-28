@@ -1,3 +1,7 @@
 {
-  "recommendations": ["shopify.ruby-extensions-pack", "esbenp.prettier-vscode"]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "sianglim.slim",
+    "rubocop.vscode-rubocop"
+  ]
 }

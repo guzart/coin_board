@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.1.2"
+ruby "3.3.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -48,9 +48,9 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "devise", "~> 4.9"
+gem "dry-initializer"
 gem "slim-rails"
 gem "view_component"
-gem "dry-initializer"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -70,11 +70,9 @@ group :development do
   # gem "spring"
 
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
-
-  gem "prettier_print", "~> 1.2"
-  gem "syntax_tree-haml", "~> 4.0"
-  gem "syntax_tree-rbs", "~> 1.0"
-  gem "syntax_tree", "~> 6.2"
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+  gem "solargraph", require: false
 end
 
 group :test do
