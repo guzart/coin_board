@@ -115,6 +115,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
+    dotenv (3.1.0)
     drb (2.2.1)
     dry-initializer (3.1.1)
     e2mmap (0.1.0)
@@ -371,6 +372,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise (~> 4.9)
+  dotenv
   dry-initializer
   error_highlight (>= 0.4.0)
   jbuilder
