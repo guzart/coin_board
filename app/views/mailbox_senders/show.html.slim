@@ -13,10 +13,12 @@ h3.h4.mt-8 Messages
   p No messages found.
 
 - else
-  = render ListGroupComponent.new do |lg|
+  = render AccordionComponent.new do |acc|
     - @mailbox_sender.mailbox_messages.each do |mailbox_message|
-      = lg.with_item
-        = mailbox_message.message_id
-        br
-        = mailbox_message.subject || "[No subject]"
+      = acc.with_item do |acc_item|
+        .text-truncate
+          = mailbox_message.subject || "[No subject]"
+          span.text-xs.text-secondary.ms-4 = mailbox_message.created_at
+        - acc_item.with_body do
+          = mailbox_message.body
 
