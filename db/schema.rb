@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_28_050448) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_29_052208) do
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -26,6 +26,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_050448) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "mailbox_messages", force: :cascade do |t|
+    t.integer "mailbox_sender_id", null: false
+    t.bigint "uid", null: false
+    t.string "message_id"
+    t.text "body", null: false
+    t.string "content_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mailbox_sender_id"], name: "index_mailbox_messages_on_mailbox_sender_id"
+  end
+
   create_table "mailbox_senders", force: :cascade do |t|
     t.integer "mailbox_id", null: false
     t.string "name", null: false
@@ -33,7 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_050448) do
     t.boolean "allowed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_mailbox_senders_on_email"
+    t.index ["mailbox_id", "email"], name: "index_mailbox_senders_on_mailbox_id_and_email", unique: true
     t.index ["mailbox_id"], name: "index_mailbox_senders_on_mailbox_id"
   end
 
@@ -72,6 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_050448) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "mailbox_messages", "mailbox_senders"
   add_foreign_key "mailbox_senders", "mailboxes"
   add_foreign_key "mailboxes", "users"
 end

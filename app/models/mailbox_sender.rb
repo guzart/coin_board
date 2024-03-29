@@ -12,8 +12,8 @@
 #
 # Indexes
 #
-#  index_mailbox_senders_on_email       (email)
-#  index_mailbox_senders_on_mailbox_id  (mailbox_id)
+#  index_mailbox_senders_on_mailbox_id            (mailbox_id)
+#  index_mailbox_senders_on_mailbox_id_and_email  (mailbox_id,email) UNIQUE
 #
 # Foreign Keys
 #
@@ -21,6 +21,8 @@
 #
 class MailboxSender < ApplicationRecord
   belongs_to :mailbox
+  has_many :mailbox_messages, dependent: :destroy
+
   before_validation :ensure_name_has_value
 
   scope :allowed, -> { where(allowed: true) }
