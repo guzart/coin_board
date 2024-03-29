@@ -1,0 +1,22 @@
+
+h2
+  = @mailbox_sender.name
+
+div
+  = @mailbox_sender.email
+  br
+  = render mailbox_sender_status_badge(@mailbox_sender)
+
+h3.h4.mt-8 Messages
+
+- if @mailbox_sender.mailbox_messages.empty?
+  p No messages found.
+
+- else
+  = render ListGroupComponent.new do |lg|
+    - @mailbox_sender.mailbox_messages.each do |mailbox_message|
+      = lg.with_item
+        = mailbox_message.message_id
+        br
+        = mailbox_message.subject || "[No subject]"
+

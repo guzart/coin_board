@@ -8,13 +8,13 @@
             br
             = mailbox_sender.email
           div
-            = render StatusBadgeComponent.new("Approved", variant: :success) if mailbox_sender.approved?
-            = render StatusBadgeComponent.new("Blocked", variant: :danger) if mailbox_sender.blocked?
-            = render StatusBadgeComponent.new("Pending approval", variant: :info) if mailbox_sender.pending?
+            = render mailbox_sender_status_badge(mailbox_sender)
         div
           - if mailbox_sender.pending?
             = render mailbox_sender_approve_button(mailbox_sender)
             = render mailbox_sender_block_button(mailbox_sender, class: "ms-2")
+          - else
+            = render ButtonComponent.new("View", href: mailbox_sender_path(mailbox_sender), outline: true)
 
 
 
