@@ -5,6 +5,7 @@
 #  id                :integer          not null, primary key
 #  body              :text             not null
 #  content_type      :string           not null
+#  subject           :string
 #  uid               :bigint           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
@@ -29,6 +30,8 @@ class MailboxMessage < ApplicationRecord
   belongs_to :mailbox_sender
 
   has_one :mailbox, through: :mailbox_sender
+
+  normalizes :subject, with: ->(subject) { subject.to_s.strip.presence }
 
   validates :body, presence: true
   validates :content_type, presence: true, inclusion: { in: %w[text/plain text/html] }

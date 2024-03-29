@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  email      :string           not null
 #  name       :string           not null
-#  status     :integer          default(0), not null
+#  status     :integer          default("pending"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  mailbox_id :integer          not null

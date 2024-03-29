@@ -52,7 +52,8 @@ class RouteMessageJob < ApplicationJob
 
   def create_mailbox_message(mailbox_sender)
     mailbox_sender.mailbox_messages.find_or_create_by!(uid: message.uid) do |mailbox_message|
-      mailbox_message.attributes = mailbox_message_content_attrs.merge(message_id: message.message_id)
+      mailbox_message.attributes = mailbox_message_content_attrs.merge(message_id: message.message_id,
+                                                                       subject: message.subject)
     end
   end
 
