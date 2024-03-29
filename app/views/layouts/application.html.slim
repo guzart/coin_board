@@ -18,9 +18,10 @@ html
 
     - if current_user
       ul.list-inline
-        li.list-inline-item = link_to 'Mailbox', mailbox_path(current_user.mailbox)
+        li.list-inline-item = link_to 'Mailbox', current_user_root_path
         li.list-inline-item = link_to 'Me', user_path(current_user)
         li.list-inline-item = link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }
+
     - elsif !devise_controller?
       = link_to 'Sign in', new_user_session_path
 
