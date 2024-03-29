@@ -1,6 +1,6 @@
 require "active_support/core_ext/integer/time"
 
-Rails.application.configure do
+Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -74,6 +74,16 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "coin_board_production"
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch("MAIL_SMTP_ADDRESS"),
+    port: ENV.fetch("MAIL_SMTP_PORT"),
+    user_name: ENV.fetch("MAIL_SMTP_USERNAME"),
+    password: ENV.fetch("MAIL_SMTP_PASSWORD"),
+    authentication: "plain",
+    enable_starttls: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
