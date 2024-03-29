@@ -23,7 +23,7 @@ class MailboxSender < ApplicationRecord
   belongs_to :mailbox
   has_many :mailbox_messages, dependent: :destroy
 
-  enum status: %i[pending blocked allowed]
+  enum status: %i[pending blocked approved]
 
   before_validation :ensure_name_has_value
 

@@ -24,7 +24,7 @@ class RouteMessageJob < ApplicationJob
     recipients_mailboxes.find_each do |mailbox|
       mailbox_sender = mailbox.mailbox_senders.create_or_find_by!(email: sender_email)
       mailbox_message = create_mailbox_message(mailbox_sender)
-      ParseMessageJob.perform_later(mailbox_message) if mailbox_sender.allowed?
+      ParseMessageJob.perform_later(mailbox_message) if mailbox_sender.approved?
     rescue NoMessagePartFound
       logger.error "No message parts found: #{message_details}"
     end
