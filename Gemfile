@@ -48,6 +48,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "cancancan"
+gem "daemons"
+gem "delayed_job_active_record"
 gem "devise", "~> 4.9"
 gem "dry-initializer"
 gem "slim-rails"
