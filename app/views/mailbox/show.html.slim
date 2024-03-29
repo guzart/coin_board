@@ -19,8 +19,5 @@ p
         | You received an email from the following sender:
         br
         strong = mailbox_sender.email
-      = render ButtonComponent.new("Approve", href: approve_mailbox_sender_path(mailbox_sender),
-                                              data: { turbo_method: :post }, variant: :info)
-      = render ButtonComponent.new("Block", href: block_mailbox_sender_path(mailbox_sender),
-                                            data: { turbo_method: :post },
-                                            class: "ms-2", variant: :danger, outline: true)
+      = render mailbox_sender_approve_button(mailbox_sender)
+      = render mailbox_sender_block_button(mailbox_sender, class: "ms-2")

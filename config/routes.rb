@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show]
   resources :mailbox, only: %i[show]
-  resources :mailbox_senders, only: [] do
+  resources :mailbox_senders, only: %i[index] do
     member do
       post :approve
       post :block
