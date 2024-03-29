@@ -1,4 +1,4 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server
-jobs: env RUBY_DEBUG_OPEN=true bin/delayed_job start
+jobs: bin/rails jobs:work
 js: yarn build --watch
 css: yarn watch:css
