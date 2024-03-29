@@ -387,6 +387,7 @@ DEPENDENCIES
   error_highlight (>= 0.4.0)
   jbuilder
   jsbundling-rails
+  mail
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.2)
   redis (>= 4.0.1)

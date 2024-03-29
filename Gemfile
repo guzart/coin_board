@@ -52,6 +52,7 @@ gem "daemons"
 gem "delayed_job_active_record"
 gem "devise", "~> 4.9"
 gem "dry-initializer"
+gem "mail"
 gem "slim-rails"
 gem "view_component"
 
