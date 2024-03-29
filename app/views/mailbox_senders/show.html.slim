@@ -16,9 +16,10 @@ h3.h4.mt-8 Messages
   = render AccordionComponent.new do |acc|
     - @mailbox_sender.mailbox_messages.each do |mailbox_message|
       = acc.with_item do |acc_item|
-        .text-truncate
-          = mailbox_message.subject || "[No subject]"
-          span.text-xs.text-secondary.ms-4 = mailbox_message.created_at
+        - acc_item.with_header do
+          .text-truncate
+            = mailbox_message.subject || "[No subject]"
+            span.text-xs.text-secondary.ms-4 = mailbox_message.created_at
         - acc_item.with_body do
-          = mailbox_message.body
+          = sanitize mailbox_message.body
 

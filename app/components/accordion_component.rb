@@ -19,6 +19,7 @@ class AccordionComponent < ApplicationComponent
     option :parent_id
     option :header_tag, default: proc { :h2 }
 
+    renders_one :header, ->(&block) { content_tag(:span, &block) }
     renders_one :body, lambda { |content: nil, &block|
       content_tag(:div, id: collapsible_target_id, class: "accordion-collapse collapse",
                         data: { bs_parent: "##{parent_id}" }) do
@@ -36,7 +37,7 @@ class AccordionComponent < ApplicationComponent
     private
 
     def text_or_content
-      text || content
+      text || header || content
     end
 
     def header_button
