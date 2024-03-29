@@ -5,14 +5,14 @@ class AlertComponent < ApplicationComponent
   option :variant, default: proc { :primary }
 
   slim_template <<~SLIM
-    div[class=root_classes]
+    = content_tag(:div, class: root_class, id:, data:)
       = message_or_content
   SLIM
 
   private
 
-  def root_classes
-    "#{class_name} alert alert-#{variant}"
+  def root_class
+    "alert alert-#{variant} #{class_name}"
   end
 
   def message_or_content
