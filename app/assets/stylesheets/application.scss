@@ -18,11 +18,14 @@ $fa-font-path: "fontawesome";
 
 $btn-color: #fefefe;
 
-.btn-success {
+.btn-success,
+.btn-info {
   --bs-btn-color: #{$light};
+  &:hover {
+    --bs-btn-hover-color: #{$light};
+  }
 }
 
-.btn-success,
 .btn-outline-primary,
 .btn-outline-success,
 .btn-outline-danger {

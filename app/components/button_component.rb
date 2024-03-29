@@ -7,11 +7,15 @@ class ButtonComponent < ApplicationComponent
   option :size, default: proc { nil }
   option :outline, default: proc { false }
   option :type, default: proc { :button }
+  option :href, default: proc { nil }
 
-  slim_template <<~SLIM
-    = button_tag :button, class: root_class, type:, id:, data:
-      = text_or_content
-  SLIM
+  def call
+    if href
+      link_to(text_or_content, href, class: root_class, id:, data:)
+    else
+      button_tag(text_or_content, class: root_class, type:, id:, data:)
+    end
+  end
 
   private
 
