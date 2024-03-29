@@ -32,7 +32,26 @@ class MailboxSender < ApplicationRecord
   validates :email, presence: true
   validates :name, presence: true
 
+  def approve!
+    return if approved?
+
+    update!(status: :approved)
+    enqueue_parse_message_jobs
+  end
+
+  def block!
+    return if blocked?
+
+    update!(status: :blocked)
+    mailbox_messages.destroy_all
+  end
+
   private
+
+  def enqueue_parse_message_jobs
+    parse_messages_jobs = mailbox_messages.map { |mm| ParseMessageJob.new(mm) }
+    ActiveJob.perform_all_later(parse_messages_jobs)
+  end
 
   def ensure_name_has_value
     self.name = email.split("@").first if name.blank?

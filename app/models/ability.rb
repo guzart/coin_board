@@ -30,6 +30,8 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
 
     can :manage, User, id: user.id
-    can :manage, Mailbox, user:
+    can(:manage, Mailbox, user:)
+    can :manage, MailboxSender, mailbox: { user: }
+    can :manage, MailboxMessage, mailbox_sender: { mailbox: { user: } }
   end
 end

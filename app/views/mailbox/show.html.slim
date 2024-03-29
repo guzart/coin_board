@@ -7,3 +7,20 @@ p
   p
     => icon(:spinner, animate: :spin_pulse)
     | Waiting for notifications emails from your bank.
+
+- senders_pending_approval = mailbox_senders_pending_approval(@mailbox)
+- if senders_pending_approval.any?
+  p
+    | The following sender's email addresses are pending approval:
+  - senders_pending_approval.each do |mailbox_sender|
+    = render CardComponent.new do |c|
+      = c.with_title "Approve sender"
+      = c.with_text
+        | You received an email from the following sender:
+        br
+        strong = mailbox_sender.email
+      = render ButtonComponent.new("Approve", href: approve_mailbox_sender_path(mailbox_sender),
+                                              data: { turbo_method: :post }, variant: :info)
+      = render ButtonComponent.new("Block", href: block_mailbox_sender_path(mailbox_sender),
+                                            data: { turbo_method: :post },
+                                            class: "ms-2", variant: :danger, outline: true)
