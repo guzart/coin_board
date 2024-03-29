@@ -23,6 +23,8 @@ class Mailbox < ApplicationRecord
 
   before_validation :generate_email
 
+  normalizes :email, with: ->(email) { Utils::EmailNormalizer.normalize(email) }
+
   validates :email, uniqueness: true, presence: true
 
   private

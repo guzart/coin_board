@@ -21,7 +21,18 @@
 #
 class MailboxSender < ApplicationRecord
   belongs_to :mailbox
+  before_validation :ensure_name_has_value
+
+  scope :allowed, -> { where(allowed: true) }
+
+  normalizes :email, with: ->(email) { Utils::EmailNormalizer.normalize(email) }
 
   validates :email, presence: true
   validates :name, presence: true
+
+  private
+
+  def ensure_name_has_value
+    self.name = email.split("@").first if name.blank?
+  end
 end
