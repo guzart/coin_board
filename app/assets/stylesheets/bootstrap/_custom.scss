@@ -15,20 +15,22 @@ $border-radius: 3px;
 @import "./_bootstrap.scss";
 @import "bootstrap-icons/font/bootstrap-icons";
 
-$btn-color: #fefefe;
-
+.btn-primary,
+.btn-secondary,
 .btn-success,
-.btn-info {
+.btn-info,
+.btn-warning,
+.btn-danger {
   --bs-btn-color: #{$light};
-  &:hover {
-    --bs-btn-hover-color: #{$light};
-  }
+  --bs-btn-active-color: #{$light};
+  --bs-btn-hover-color: #{$light};
 }
 
 .btn-outline-primary,
+.btn-outline-secondary,
 .btn-outline-success,
+.btn-outline-info,
+.btn-outline-warning,
 .btn-outline-danger {
-  &:hover {
-    --bs-btn-hover-color: #{$light};
-  }
+  --bs-btn-hover-color: #{$light};
 }
