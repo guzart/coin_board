@@ -12,7 +12,7 @@ class StatusBadgeComponent < ApplicationComponent
   private
 
   def root_class
-    "d-flex align-items-center column-gap-1 #{class_name}"
+    "d-inline-flex align-items-center column-gap-1 #{class_name}"
   end
 
   def status_wrapper_class
@@ -24,7 +24,7 @@ class StatusBadgeComponent < ApplicationComponent
   end
 
   def content_class
-    "text-xs lh-base text-secondary m-0"
+    "d-inline text-xs lh-base text-secondary m-0"
   end
 
   def text_or_content
