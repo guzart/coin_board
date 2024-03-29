@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_29_052208) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_29_143909) do
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -41,9 +41,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_29_052208) do
     t.integer "mailbox_id", null: false
     t.string "name", null: false
     t.string "email", null: false
-    t.boolean "allowed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
     t.index ["mailbox_id", "email"], name: "index_mailbox_senders_on_mailbox_id_and_email", unique: true
     t.index ["mailbox_id"], name: "index_mailbox_senders_on_mailbox_id"
   end

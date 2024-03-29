@@ -3,9 +3,9 @@
 # Table name: mailbox_senders
 #
 #  id         :integer          not null, primary key
-#  allowed    :boolean          default(FALSE), not null
 #  email      :string           not null
 #  name       :string           not null
+#  status     :integer          default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  mailbox_id :integer          not null
@@ -23,9 +23,9 @@ class MailboxSender < ApplicationRecord
   belongs_to :mailbox
   has_many :mailbox_messages, dependent: :destroy
 
-  before_validation :ensure_name_has_value
+  enum status: %i[pending blocked allowed]
 
-  scope :allowed, -> { where(allowed: true) }
+  before_validation :ensure_name_has_value
 
   normalizes :email, with: ->(email) { Utils::EmailNormalizer.normalize(email) }
 
