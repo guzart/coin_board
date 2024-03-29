@@ -54,7 +54,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Log to STDOUT by default
   config.logger =
     ActiveSupport::Logger
-    .new(STDOUT)
+    .new($stdout)
     .tap { |logger| logger.formatter = ::Logger::Formatter.new }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
@@ -70,7 +70,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter = :resque
+  config.active_job.queue_adapter = :delayed_job
   # config.active_job.queue_name_prefix = "coin_board_production"
 
   config.action_mailer.perform_caching = false
