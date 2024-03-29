@@ -1,5 +1,5 @@
 import { Application } from "@hotwired/stimulus";
-import HelloController from "./hello_controller.ts";
+import { CollapseController } from "./collapse_controller.ts";
 
 export function start() {
   const application = Application.start();
@@ -9,5 +9,7 @@ export function start() {
   window.Stimulus = application;
 
   // Register controllers
-  application.register("hello", HelloController);
+  [CollapseController].forEach((controller) =>
+    application.register(controller.identifier, controller),
+  );
 }

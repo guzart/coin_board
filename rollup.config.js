@@ -1,4 +1,5 @@
 import resolve from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
 
 export default {
   input: "app/javascript/application.ts",
@@ -8,5 +9,5 @@ export default {
     inlineDynamicImports: true,
     sourcemap: true,
   },
-  plugins: [resolve()],
+  plugins: [resolve(), typescript()],
 };
