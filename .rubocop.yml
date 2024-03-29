@@ -3,6 +3,9 @@ AllCops:
   Exclude:
     - "db/migrate/*.rb"
 
+Style/Documentation:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
