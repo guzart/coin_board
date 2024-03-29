@@ -1,0 +1,64 @@
+$text-sizes: (
+  xs: (
+    font-size: 0.75rem,
+    line-height: 1rem
+  ),
+  sm: (
+    font-size: $font-size-sm,
+    line-height: $line-height-sm
+  )
+);
+
+@each $key, $value in $text-sizes {
+  .text-#{$key} {
+    font-size: map-get($value, "font-size");
+    line-height: map-get($value, "line-height");
+  }
+}
+
+$sizings: (
+  1: $spacer * 0.25,
+  1\.5: $spacer * 0.375,
+  4: $spacer,
+  6: $spacer * 1.5,
+  8: $spacer * 2,
+  16: $spacer * 4,
+  18: $spacer * 4.5,
+  72: $spacer * 18,
+  1\/4: 25%,
+  1\/3: 33.333333%,
+  "full": 100%,
+  auto: auto
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "flex":
+      map-merge(
+        map-get($utilities, "flex"),
+        (
+          values: (
+            1: 1 1 0%,
+            fill: 1 1 auto
+          )
+        )
+      ),
+    "height":
+      map-merge(
+        map-get($utilities, "height"),
+        (
+          responsive: true,
+          values: $sizings
+        )
+      ),
+    "width":
+      map-merge(
+        map-get($utilities, "width"),
+        (
+          responsive: true,
+          values: $sizings
+        )
+      ),
+  )
+);
