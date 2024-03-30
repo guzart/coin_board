@@ -5,6 +5,7 @@ class RouteMessageJob < ApplicationJob
 
   def perform(message_uid)
     find_mail_depot_message(message_uid)
+    validate_mail_depot_message
     route_mail_depot_message_to_mailboxes
     delete_mail_depot_message
   end
@@ -18,6 +19,10 @@ class RouteMessageJob < ApplicationJob
     raise "Message with uid #{message_uid} not found" if message.nil?
 
     logger.info "Routing message from #{message.from} to #{message.to} with subject: #{message.subject}"
+  end
+
+  def validate_mail_depot_message
+    # TODO: validate either SPF or DKIM pass
   end
 
   def route_mail_depot_message_to_mailboxes
