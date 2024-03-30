@@ -2,8 +2,7 @@ class MailboxController < ApplicationController
   before_action :set_mailbox
   load_and_authorize_resource
 
-  def show
-  end
+  def show; end
 
   private
 
