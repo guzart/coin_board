@@ -1,0 +1,6 @@
+.d-flex.align-items-center.justify-content-between.mb-3
+  h2.h3 = @mailbox_message_dispatcher.name
+  div
+    = render DropdownButtonComponent.new("Options", variant: :text) do |db|
+      - db.with_menu_item "Delete", href: mailbox_message_dispatcher_path(@mailbox_message_dispatcher),
+                                    icon: :trash, **delete_button_options_for(@mailbox_message_dispatcher)

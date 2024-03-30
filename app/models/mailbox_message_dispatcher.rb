@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: mailbox_message_parsers
+# Table name: mailbox_message_dispatchers
 #
 #  id                       :integer          not null, primary key
 #  name                     :string
@@ -11,15 +11,15 @@
 #
 # Indexes
 #
-#  index_mailbox_message_parsers_on_match_condition_group_id  (match_condition_group_id)
-#  index_mailbox_message_parsers_on_user_id                   (user_id)
+#  index_mailbox_message_dispatchers_on_match_condition_group_id  (match_condition_group_id)
+#  index_mailbox_message_dispatchers_on_user_id                   (user_id)
 #
 # Foreign Keys
 #
 #  match_condition_group_id  (match_condition_group_id => condition_groups.id)
 #  user_id                   (user_id => users.id)
 #
-class MailboxMessageParser < ApplicationRecord
+class MailboxMessageDispatcher < ApplicationRecord
   belongs_to :user
   belongs_to :match_condition_group, class_name: "ConditionGroup"
 

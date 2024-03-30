@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_30_011045) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_30_185828) do
   create_table "condition_groups", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "logical_operator", null: false
@@ -47,14 +47,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_011045) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "mailbox_message_parsers", force: :cascade do |t|
+  create_table "mailbox_message_dispatchers", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name"
     t.integer "match_condition_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["match_condition_group_id"], name: "index_mailbox_message_parsers_on_match_condition_group_id"
-    t.index ["user_id"], name: "index_mailbox_message_parsers_on_user_id"
+    t.index ["match_condition_group_id"], name: "index_mailbox_message_dispatchers_on_match_condition_group_id"
+    t.index ["user_id"], name: "index_mailbox_message_dispatchers_on_user_id"
   end
 
   create_table "mailbox_messages", force: :cascade do |t|
@@ -118,8 +118,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_011045) do
   add_foreign_key "condition_groups", "condition_groups", column: "parent_condition_group_id"
   add_foreign_key "condition_groups", "users"
   add_foreign_key "conditions", "condition_groups"
-  add_foreign_key "mailbox_message_parsers", "condition_groups", column: "match_condition_group_id"
-  add_foreign_key "mailbox_message_parsers", "users"
+  add_foreign_key "mailbox_message_dispatchers", "condition_groups", column: "match_condition_group_id"
+  add_foreign_key "mailbox_message_dispatchers", "users"
   add_foreign_key "mailbox_messages", "mailbox_senders"
   add_foreign_key "mailbox_senders", "mailboxes"
   add_foreign_key "mailboxes", "users"

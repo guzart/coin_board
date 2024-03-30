@@ -33,9 +33,9 @@ en:
       create: "Add %{model}"
       update: "Update %{model}"
 
-      mailbox_message_parser:
-        create: "Add message parser"
-        update: "Update message parser"
+      mailbox_message_dispatcher:
+        create: "Add dispatcher"
+        update: "Update dispatcher"
 
   messages:
     confirm_delete: "Are you sure you want to delete %{name}?"

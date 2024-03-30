@@ -37,6 +37,6 @@ class Ability
     can(:manage, ConditionGroup, user:)
     can :manage, Condition, condition_group: { user: }
 
-    can(:manage, MailboxMessageParser, user:)
+    can(:manage, MailboxMessageDispatcher, user:)
   end
 end

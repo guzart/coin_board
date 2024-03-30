@@ -43,7 +43,7 @@ class User < ApplicationRecord
 
   has_one :mailbox, dependent: :destroy
   has_many :condition_groups, dependent: :destroy
-  has_many :mailbox_message_parsers, dependent: :destroy
+  has_many :mailbox_message_dispatchers, dependent: :destroy
 
   after_create :create_mailbox
 
