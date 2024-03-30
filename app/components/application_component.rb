@@ -4,6 +4,7 @@ class ApplicationComponent < ViewComponent::Base
   option :id, optional: true
   option :class, default: proc { "" }, as: :class_name
   option :data, default: proc { {} }
+  option :aria, default: proc { {} }
 
   private
 

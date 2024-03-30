@@ -11,9 +11,9 @@ class ButtonComponent < ApplicationComponent
 
   def call
     if href
-      link_to(text_or_content, href, class: root_class, id:, data:)
+      link_to(text_or_content, href, class: root_class, id:, data:, aria:)
     else
-      button_tag(text_or_content, class: root_class, type:, id:, data:)
+      button_tag(text_or_content, class: root_class, type:, id:, data:, aria:)
     end
   end
 
