@@ -3,6 +3,10 @@ AllCops:
   Exclude:
     - "db/migrate/*.rb"
 
+Metrics/BlockLength:
+  Exclude:
+    - "config/initializers/simple_form.rb"
+
 Style/Documentation:
   Enabled: false
 
