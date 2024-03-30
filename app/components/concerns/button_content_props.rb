@@ -2,20 +2,24 @@ module ButtonContentProps
   extend ActiveSupport::Concern
 
   included do
-    param :text, optional: true, default: proc { nil }
+    param :label, optional: true
+    option :href, optional: true
     option :type, default: proc { :button }
-    option :href, default: proc { nil }
 
     private
 
-    alias_method :original_content, :content
+    def button_content_props
+      { label:, type:, href: }
+    end
 
     def link?
       href.present?
     end
 
+    alias_method :original_content, :content
+
     def content
-      return text if text.present?
+      return label if label.present?
 
       original_content
     end
