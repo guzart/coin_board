@@ -1,0 +1,36 @@
+name: Rails tests
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    branches: "*"
+
+env:
+  RAILS_ENV: test
+
+jobs:
+  rails-test:
+    name: Rails tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .tool-versions
+      - run: yarn install --immutable
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .tool-versions
+          bundler-cache: true
+      - run: bin/rails db:setup
+      - run: bin/rails assets:precompile
+        env:
+          SECRET_KEY_BASE_DUMMY: 1
+      - run: bin/rspec
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: system-tests-screenshots
+          path: tmp/screenshots/
