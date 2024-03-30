@@ -56,7 +56,7 @@ module MailDepot
       end
     end
 
-    def detached_wait_for_mail(&block)
+    def detached_listen_for_mail(&block)
       @you_got_mail_callback = block
       pid = fork do
         conn = Connection.new
