@@ -1,6 +1,18 @@
-= render ButtonComponent.new 'Add message parser'
+.mb-4
+  = render ButtonComponent.new "Add message parser", data: { controller: "toggle-modal", toggle_modal_selector_value: "#add-message-parser-modal" }
+
+= render ModalComponent.new "Add message parser", id: "add-message-parser-modal" do |modal|
+  = simple_form_for MailboxMessageParser.new do |f|
+    = f.input :name
+    = f.button :submit, "Add message parser"
+
+- if @mailbox_message_parsers.empty?
+  p No message parsers yet.
 
 = render ListGroupComponent.new do |lg|
   - @mailbox_message_parsers.each do |message_parser|
     = lg.with_item do
-      = message_parser.id
+      .d-flex.justify-content-between.align-items-center
+        div = message_parser.name
+        div
+          = render ButtonComponent.new("View", href: mailbox_message_parser_path(message_parser), outline: true)

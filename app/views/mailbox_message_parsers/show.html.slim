@@ -1,1 +1,5 @@
-h2.h3 = @mailbox_message_parser.id
+h2.h3 = @mailbox_message_parser.name
+
+= render ButtonComponent.new "Delete", href: mailbox_message_parser_path(@mailbox_message_parser),
+                                       data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                                       outline: true, variant: :danger

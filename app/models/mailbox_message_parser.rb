@@ -23,5 +23,13 @@ class MailboxMessageParser < ApplicationRecord
   belongs_to :user
   belongs_to :match_condition_group, class_name: "ConditionGroup"
 
+  before_validation :ensure_match_condition_group
+
   accepts_nested_attributes_for :match_condition_group, update_only: true
+
+  private
+
+  def ensure_match_condition_group
+    build_match_condition_group(logical_operator: "AND", user:) if new_record? && match_condition_group_id.nil?
+  end
 end
