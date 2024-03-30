@@ -1,4 +1,4 @@
-class RouteMessageJob < ApplicationJob
+class DistributeMessageJob < ApplicationJob
   queue_as :default
 
   NoMessagePartFound = Class.new(StandardError)
