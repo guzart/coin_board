@@ -1,7 +1,7 @@
 module IconHelper
   def icon(name, animate: nil)
     style_classname = "fa-regular"
-    icon_classname = "fa-#{name}"
+    icon_classname = "fa-#{name.to_s.gsub('_', '-')}"
     content_tag(:i, nil, class: [style_classname, icon_classname, icon_animate_classname(animate)].compact.join(" "))
   end
 
