@@ -16,12 +16,10 @@ module ButtonContentProps
       href.present?
     end
 
-    alias_method :original_content, :content
-
-    def content
+    def label_or_content
       return label if label.present?
 
-      original_content
+      content
     end
   end
 end
