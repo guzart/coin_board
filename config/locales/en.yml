@@ -36,3 +36,6 @@ en:
       mailbox_message_parser:
         create: "Add message parser"
         update: "Update message parser"
+
+  messages:
+    confirm_delete: "Are you sure you want to delete %{name}?"

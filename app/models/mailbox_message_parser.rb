@@ -29,6 +29,10 @@ class MailboxMessageParser < ApplicationRecord
 
   accepts_nested_attributes_for :match_condition_group, update_only: true
 
+  def to_s
+    name
+  end
+
   private
 
   def ensure_match_condition_group
