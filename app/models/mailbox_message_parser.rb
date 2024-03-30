@@ -25,6 +25,8 @@ class MailboxMessageParser < ApplicationRecord
 
   before_validation :ensure_match_condition_group
 
+  validates :name, presence: true
+
   accepts_nested_attributes_for :match_condition_group, update_only: true
 
   private

@@ -1,14 +1,19 @@
 class MailboxMessageParsersController < ApplicationController
   load_and_authorize_resource
 
-  def index; end
+  def index
+    @mailbox_message_parser = MailboxMessageParser.new
+  end
 
   def show; end
 
   def create
-    @mailbox_message_parser.user = current_user
-    @mailbox_message_parser.save!
-    redirect_to mailbox_message_parser_path(@mailbox_message_parser)
+    redirect_to mailbox_message_parser_path(@mailbox_message_parser) if @mailbox_message_parser.save
+
+    respond_to do |format|
+      format.html { render :index }
+      format.turbo_stream
+    end
   end
 
   def destroy

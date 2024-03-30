@@ -1,10 +1,8 @@
-.mb-4
-  = render ButtonComponent.new "Add message parser", data: { controller: "toggle-modal", toggle_modal_selector_value: "#add-message-parser-modal" }
+= render ModalComponent.new id: "add-message-parser-modal" do |modal|
+  = render "form", mailbox_message_parser: @mailbox_message_parser
 
-= render ModalComponent.new "Add message parser", id: "add-message-parser-modal" do |modal|
-  = simple_form_for MailboxMessageParser.new do |f|
-    = f.input :name
-    = f.button :submit, "Add message parser"
+.mb-4
+  = render toggle_modal_button(t('helpers.submit.mailbox_message_parser.create'), selector: "#add-message-parser-modal")
 
 - if @mailbox_message_parsers.empty?
   p No message parsers yet.

@@ -9,6 +9,9 @@
 #
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
+  onep_ignore = { "data-1p-ignore": true }
+  validation_classes = { error_class: "is-invalid", valid_class: "is-valid" }
+
   # Wrappers are used by the form builder to generate a
   # complete input. You can remove any component from the
   # wrapper, change the order or even add your own to the
@@ -24,18 +27,18 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     b.use :label, class: "form-label"
-    b.use :input, class: "form-control"
-    b.use :full_error, wrap_with: { class: "invalid-feedback" }
-    b.use :hint, wrap_with: { tag: :span, class: "form-text" }
+    b.use :input, class: "form-control", **validation_classes.merge(onep_ignore)
+    b.use :full_error, wrap_with: { tag: :div, class: "invalid-feedback" }
+    b.use :hint, wrap_with: { tag: :div, class: "form-text" }
   end
 
   config.wrappers :vertical_select, class: "f-selectGroup" do |b|
     b.use :html5
     b.optional :readonly
     b.use :label, class: "form-label"
-    b.use :input, class: "form-select"
-    b.use :full_error, wrap_with: { class: "invalid-feedback" }
-    b.use :hint, wrap_with: { class: "form-text" }
+    b.use :input, class: "form-select", **validation_classes
+    b.use :full_error, wrap_with: { tag: :div, class: "invalid-feedback" }
+    b.use :hint, wrap_with: { tag: :div, class: "form-text" }
   end
 
   # The default wrapper to be used by the FormBuilder.
@@ -101,7 +104,7 @@ SimpleForm.setup do |config|
   # in this configuration, which is recommended due to some quirks from different browsers.
   # To stop SimpleForm from generating the novalidate option, enabling the HTML5 validations,
   # change this configuration to true.
-  config.browser_validations = false
+  # config.browser_validations = false
 
   # Custom mappings for input types. This should be a hash containing a regexp
   # to match as key, and the input type that will be used when the field name
@@ -147,6 +150,6 @@ SimpleForm.setup do |config|
   # config.i18n_scope = 'simple_form'
 
   # Defines validation classes to the input_field. By default it's nil.
-  config.input_field_valid_class = "is-valid"
-  config.input_field_error_class = "is-invalid"
+  # config.input_field_valid_class = "is-valid"
+  # config.input_field_error_class = "is-invalid"
 end
