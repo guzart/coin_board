@@ -1,5 +1,5 @@
 require "net/imap"
-require_relative "mail_ext"
+require_relative "extensions/mail"
 
 module MailDepot
   class Client
