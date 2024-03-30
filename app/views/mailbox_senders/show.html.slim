@@ -15,7 +15,7 @@ h3.h4.mt-8 Messages
 - else
   = render AccordionComponent.new do |acc|
     - @mailbox_sender.mailbox_messages.each do |mailbox_message|
-      = acc.with_item do |acc_item|
+      - acc.with_item do |acc_item|
         - acc_item.with_header do
           .text-truncate
             = mailbox_message.subject || "[No subject]"

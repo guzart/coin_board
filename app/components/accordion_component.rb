@@ -5,7 +5,8 @@ class AccordionComponent < ApplicationComponent
 
   slim_template <<~SLIM
     = content_tag :div, class: root_class, id: id_with_fallback, data: do
-      = content
+      - items.each do |item|
+        = item
   SLIM
 
   private
