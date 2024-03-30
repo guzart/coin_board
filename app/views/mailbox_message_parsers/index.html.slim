@@ -1,0 +1,6 @@
+= render ButtonComponent.new 'Add message parser'
+
+= render ListGroupComponent.new do |lg|
+  - @mailbox_message_parsers.each do |message_parser|
+    = lg.with_item do
+      = message_parser.id

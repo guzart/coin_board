@@ -33,5 +33,10 @@ class Ability
     can(:manage, Mailbox, user:)
     can :manage, MailboxSender, mailbox: { user: }
     can :manage, MailboxMessage, mailbox_sender: { mailbox: { user: } }
+
+    can(:manage, ConditionGroup, user:)
+    can :manage, Condition, condition_group: { user: }
+
+    can(:manage, MailboxMessageParser, user:)
   end
 end
