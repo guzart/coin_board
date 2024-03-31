@@ -11,13 +11,14 @@
 SimpleForm.setup do |config|
   onep_ignore = { "data-1p-ignore": true }
   validation_classes = { error_class: "is-invalid", valid_class: "is-valid" }
+  wrapper_class = "mb-3"
 
   # Wrappers are used by the form builder to generate a
   # complete input. You can remove any component from the
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
-  config.wrappers :vertical_form, class: "mb-3" do |b|
+  config.wrappers :vertical_form, class: wrapper_class do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -28,16 +29,16 @@ SimpleForm.setup do |config|
 
     b.use :label, class: "form-label"
     b.use :input, class: "form-control", **validation_classes.merge(onep_ignore)
-    b.use :full_error, wrap_with: { tag: :div, class: "invalid-feedback" }
+    b.use :error, wrap_with: { tag: :div, class: "invalid-feedback" }
     b.use :hint, wrap_with: { tag: :div, class: "form-text" }
   end
 
-  config.wrappers :vertical_select, class: "f-selectGroup" do |b|
+  config.wrappers :vertical_select, class: wrapper_class do |b|
     b.use :html5
     b.optional :readonly
     b.use :label, class: "form-label"
     b.use :input, class: "form-select", **validation_classes
-    b.use :full_error, wrap_with: { tag: :div, class: "invalid-feedback" }
+    b.use :error, wrap_with: { tag: :div, class: "invalid-feedback" }
     b.use :hint, wrap_with: { tag: :div, class: "form-text" }
   end
 
