@@ -1,12 +1,8 @@
 class MailboxController < ApplicationController
-  before_action :set_mailbox
   load_and_authorize_resource
 
-  def show; end
-
-  private
-
-  def set_mailbox
-    @mailbox = Mailbox.includes(:senders).find_by(user: current_user)
+  def show
+    @needs_sender_approval = @mailbox.senders.pending.exists?
+    @needs_message_dispatchers = current_user.message_dispatchers.empty?
   end
 end

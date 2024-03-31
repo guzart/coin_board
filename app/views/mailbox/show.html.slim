@@ -8,16 +8,14 @@ p
     => icon(:spinner, animate: :spin_pulse)
     | Waiting for emails from your bank.
 
-- senders_pending_approval = mailbox_senders_pending_approval(@mailbox)
-- if senders_pending_approval.any?
-  p
-    | The following sender's email addresses are pending approval:
-  - senders_pending_approval.each do |sender|
-    = render CardComponent.new do |c|
-      = c.with_title "Approve sender"
-      = c.with_text
-        | You received an email from the following sender:
-        br
-        strong = sender.email
-      = render sender_approve_button(sender)
-      = render sender_block_button(sender, class: "ms-2")
+- if @needs_sender_approval
+  = render AlertComponent.new(variant: :secondary) do
+    .d-flex.justify-content-between.align-items-center
+      span You received emails from senders that are not yet approved.
+      div = render ButtonComponent.new "Go to senders", href: senders_path, variant: :secondary
+
+- if @needs_message_dispatchers
+  = render AlertComponent.new(variant: :secondary) do
+    .d-flex.justify-content-between.align-items-center
+      span Create a message dispatcher to start processing your bank emails.
+      div = render ButtonComponent.new "Go to dispatchers", href: message_dispatchers_path, variant: :secondary
