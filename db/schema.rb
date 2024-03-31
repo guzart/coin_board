@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_30_185828) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_30_201842) do
   create_table "condition_groups", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "logical_operator", null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_185828) do
     t.string "upper_bound"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "comparison_attribute"
     t.index ["condition_group_id"], name: "index_conditions_on_condition_group_id"
   end
 

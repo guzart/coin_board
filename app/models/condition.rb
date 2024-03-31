@@ -2,14 +2,15 @@
 #
 # Table name: conditions
 #
-#  id                  :integer          not null, primary key
-#  comparison_operator :string           not null
-#  comparison_value    :string
-#  lower_bound         :string
-#  upper_bound         :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  condition_group_id  :integer          not null
+#  id                   :integer          not null, primary key
+#  comparison_attribute :string
+#  comparison_operator  :string           not null
+#  comparison_value     :string
+#  lower_bound          :string
+#  upper_bound          :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  condition_group_id   :integer          not null
 #
 # Indexes
 #
@@ -21,17 +22,8 @@
 #
 
 # Other operators:
-# - IS_ONE_OF
-# - DOES_NOT_MATCH_REGEX
-# - DOES_NOT_BEGIN_WITH
-# - DOES_NOT_END_WITH
-# - DOES_NOT_CONTAIN
-# - DOES_NOT_EXACTLY_MATCH
-# - IS_NOT_ONE_OF
-# - `<`
-# - `>`
-# - `≥`
-# - `≤`
+# IS_ONE_OF DOES_NOT_MATCH_REGEX DOES_NOT_BEGIN_WITH DOES_NOT_END_WITH DOES_NOT_CONTAIN
+# DOES_NOT_EXACTLY_MATCH IS_NOT_ONE_OF `<` `>` `≥` `≤`
 class Condition < ApplicationRecord
   OPERATORS = %w[
     MATCHES_REGEX
