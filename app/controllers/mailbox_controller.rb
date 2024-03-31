@@ -7,6 +7,6 @@ class MailboxController < ApplicationController
   private
 
   def set_mailbox
-    @mailbox = Mailbox.includes(:mailbox_senders).find_by(user: current_user)
+    @mailbox = Mailbox.includes(:senders).find_by(user: current_user)
   end
 end

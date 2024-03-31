@@ -1,0 +1,25 @@
+
+h2
+  = @sender.name
+
+div
+  = @sender.email
+  br
+  = render sender_status_badge(@sender)
+
+h3.h4.mt-8 Messages
+
+- if @sender.messages.empty?
+  p No messages found.
+
+- else
+  = render AccordionComponent.new do |acc|
+    - @sender.messages.each do |message|
+      - acc.with_item do |acc_item|
+        - acc_item.with_header do
+          .text-truncate
+            = message.subject || "[No subject]"
+            span.text-xs.text-secondary.ms-4 = message.created_at
+        - acc_item.with_body do
+          = sanitize message.body
+

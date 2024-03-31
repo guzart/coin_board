@@ -1,10 +1,10 @@
 # == Schema Information
 #
-# Table name: mailbox_senders
+# Table name: senders
 #
 #  id         :integer          not null, primary key
-#  email      :string           not null
-#  name       :string           not null
+#  email      :string
+#  name       :string
 #  status     :integer          default("pending"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -12,16 +12,16 @@
 #
 # Indexes
 #
-#  index_mailbox_senders_on_mailbox_id            (mailbox_id)
-#  index_mailbox_senders_on_mailbox_id_and_email  (mailbox_id,email) UNIQUE
+#  index_senders_on_mailbox_id            (mailbox_id)
+#  index_senders_on_mailbox_id_and_email  (mailbox_id,email) UNIQUE
 #
 # Foreign Keys
 #
 #  mailbox_id  (mailbox_id => mailboxes.id)
 #
-class MailboxSender < ApplicationRecord
+class Sender < ApplicationRecord
   belongs_to :mailbox
-  has_many :mailbox_messages, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   enum status: %i[pending blocked approved]
 
@@ -43,13 +43,13 @@ class MailboxSender < ApplicationRecord
     return if blocked?
 
     update!(status: :blocked)
-    mailbox_messages.destroy_all
+    messages.destroy_all
   end
 
   private
 
   def enqueue_dispatch_message_jobs
-    dispatch_messages_jobs = mailbox_messages.map { |mm| DispatchMessageJob.new(mm) }
+    dispatch_messages_jobs = messages.map { |m| DispatchMessageJob.new(m) }
     ActiveJob.perform_all_later(dispatch_messages_jobs)
   end
 

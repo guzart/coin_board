@@ -23,33 +23,33 @@ module MailDepot
       end
     end
 
-    def find_messages_uids(count: 100)
-      logger.debug "Fetching #{count} messages from MailDepot"
+    def find_emails_uids(count: 100)
+      logger.debug "Fetching #{count} emails from MailDepot"
       with_inbox do |imap|
         uids = imap.uid_search(ALL)
-        logger.debug "Found #{uids.size} messages"
+        logger.debug "Found #{uids.size} emails"
         uids.first(count)
       end
     end
 
-    def find_messages(count = 10)
+    def find_emails(count = 10)
       with_inbox do |imap|
         uids = imap.uid_search(ALL)
         uids.first(count).map do |uid|
           fetch_data = imap.uid_fetch(uid, [RFC822])[0]
-          build_rfcs822_message(fetch_data)
+          build_rfcs822_email(fetch_data)
         end
       end
     end
 
-    def find_message(uid)
+    def find_email(uid)
       with_inbox do |imap|
         fetch_data = imap.uid_fetch(uid, [RFC822])[0]
-        build_rfcs822_message(fetch_data)
+        build_rfcs822_email(fetch_data)
       end
     end
 
-    def delete_message(uid)
+    def delete_email(uid)
       with_inbox do |imap|
         imap.uid_store(uid, "+FLAGS", [Net::IMAP::DELETED])
         imap.expunge
@@ -69,7 +69,7 @@ module MailDepot
 
     private
 
-    def build_rfcs822_message(fetch_data)
+    def build_rfcs822_email(fetch_data)
       return nil if fetch_data.nil?
 
       ::Mail.new(fetch_data.attr[RFC822]).tap do |msg|
@@ -81,8 +81,8 @@ module MailDepot
       response = conn.with_imap do |imap|
         imap.status(INBOX, [MESSAGES, RECENT])
       end
-      message_count = response[MESSAGES]
-      @you_got_mail_callback&.call if message_count.positive?
+      email_count = response[MESSAGES]
+      @you_got_mail_callback&.call if email_count.positive?
     end
 
     def wait_for_mail(conn)

@@ -19,8 +19,8 @@
 #
 class Mailbox < ApplicationRecord
   belongs_to :user
-  has_many :mailbox_senders, dependent: :destroy
-  has_many :mailbox_messages, through: :mailbox_senders
+  has_many :senders, dependent: :destroy
+  has_many :messages, through: :senders
 
   before_validation :generate_email
 

@@ -31,12 +31,12 @@ class Ability
 
     can :manage, User, id: user.id
     can(:manage, Mailbox, user:)
-    can :manage, MailboxSender, mailbox: { user: }
-    can :manage, MailboxMessage, mailbox_sender: { mailbox: { user: } }
+    can :manage, Sender, mailbox: { user: }
+    can :manage, Message, sender: { mailbox: { user: } }
 
-    can(:manage, ConditionGroup, user:)
-    can :manage, Condition, condition_group: { user: }
+    can(:manage, MessageConditionGroup, user:)
+    can :manage, MessageCondition, message_condition_group: { user: }
 
-    can(:manage, MailboxMessageDispatcher, user:)
+    can(:manage, MessageDispatcher, user:)
   end
 end

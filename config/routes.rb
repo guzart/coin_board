@@ -5,16 +5,16 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show]
   resources :mailbox, only: %i[show]
-  resources :mailbox_senders, only: %i[index show] do
+  resources :senders, only: %i[index show] do
     member do
       post :approve
       post :block
     end
   end
 
-  resources :mailbox_message_dispatchers, only: %i[index show create destroy]
+  resources :message_dispatchers, only: %i[index show create destroy]
 
-  resources :conditions, only: %i[create destroy]
+  resources :message_conditions, only: %i[create destroy]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

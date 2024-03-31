@@ -1,0 +1,20 @@
+= render ListGroupComponent.new do |lg|
+  - @senders.each do |sender|
+    = lg.with_item do
+      .d-flex.justify-content-between.align-items-center
+        div
+          div
+            strong = sender.name
+            br
+            = sender.email
+          div
+            = render sender_status_badge(sender)
+        div
+          - if sender.pending?
+            = render sender_approve_button(sender)
+            = render sender_block_button(sender, class: "ms-2")
+          - else
+            = render ButtonComponent.new("View", href: sender_path(sender), outline: true)
+
+
+

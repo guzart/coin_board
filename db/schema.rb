@@ -10,29 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_30_201842) do
-  create_table "condition_groups", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "logical_operator", null: false
-    t.integer "parent_condition_group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["parent_condition_group_id"], name: "index_condition_groups_on_parent_condition_group_id"
-    t.index ["user_id"], name: "index_condition_groups_on_user_id"
-  end
-
-  create_table "conditions", force: :cascade do |t|
-    t.integer "condition_group_id", null: false
-    t.string "comparison_operator", null: false
-    t.string "comparison_value"
-    t.string "lower_bound"
-    t.string "upper_bound"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "comparison_attribute"
-    t.index ["condition_group_id"], name: "index_conditions_on_condition_group_id"
-  end
-
+ActiveRecord::Schema[7.1].define(version: 2024_03_30_011045) do
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -48,39 +26,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_201842) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "mailbox_message_dispatchers", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "name"
-    t.integer "match_condition_group_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["match_condition_group_id"], name: "index_mailbox_message_dispatchers_on_match_condition_group_id"
-    t.index ["user_id"], name: "index_mailbox_message_dispatchers_on_user_id"
-  end
-
-  create_table "mailbox_messages", force: :cascade do |t|
-    t.integer "mailbox_sender_id", null: false
-    t.bigint "uid", null: false
-    t.string "message_id"
-    t.text "body", null: false
-    t.string "content_type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "subject"
-    t.index ["mailbox_sender_id"], name: "index_mailbox_messages_on_mailbox_sender_id"
-  end
-
-  create_table "mailbox_senders", force: :cascade do |t|
-    t.integer "mailbox_id", null: false
-    t.string "name", null: false
-    t.string "email", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
-    t.index ["mailbox_id", "email"], name: "index_mailbox_senders_on_mailbox_id_and_email", unique: true
-    t.index ["mailbox_id"], name: "index_mailbox_senders_on_mailbox_id"
-  end
-
   create_table "mailboxes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "email", null: false
@@ -88,6 +33,60 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_201842) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_mailboxes_on_email", unique: true
     t.index ["user_id"], name: "index_mailboxes_on_user_id"
+  end
+
+  create_table "message_condition_groups", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "logical_operator", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_message_condition_groups_on_user_id"
+  end
+
+  create_table "message_conditions", force: :cascade do |t|
+    t.integer "message_condition_group_id", null: false
+    t.string "comparison_attribute"
+    t.string "comparison_operator"
+    t.string "comparison_value"
+    t.integer "sender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_condition_group_id"], name: "index_message_conditions_on_message_condition_group_id"
+    t.index ["sender_id"], name: "index_message_conditions_on_sender_id"
+  end
+
+  create_table "message_dispatchers", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name"
+    t.integer "message_condition_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_condition_group_id"], name: "index_message_dispatchers_on_message_condition_group_id"
+    t.index ["user_id"], name: "index_message_dispatchers_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "sender_id", null: false
+    t.bigint "uid"
+    t.string "email_id"
+    t.datetime "sent_at"
+    t.string "subject"
+    t.text "body"
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
+  create_table "senders", force: :cascade do |t|
+    t.integer "mailbox_id", null: false
+    t.string "name"
+    t.string "email"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mailbox_id", "email"], name: "index_senders_on_mailbox_id_and_email", unique: true
+    t.index ["mailbox_id"], name: "index_senders_on_mailbox_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -116,12 +115,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_201842) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "condition_groups", "condition_groups", column: "parent_condition_group_id"
-  add_foreign_key "condition_groups", "users"
-  add_foreign_key "conditions", "condition_groups"
-  add_foreign_key "mailbox_message_dispatchers", "condition_groups", column: "match_condition_group_id"
-  add_foreign_key "mailbox_message_dispatchers", "users"
-  add_foreign_key "mailbox_messages", "mailbox_senders"
-  add_foreign_key "mailbox_senders", "mailboxes"
   add_foreign_key "mailboxes", "users"
+  add_foreign_key "message_condition_groups", "users"
+  add_foreign_key "message_conditions", "message_condition_groups"
+  add_foreign_key "message_conditions", "senders"
+  add_foreign_key "message_dispatchers", "message_condition_groups"
+  add_foreign_key "message_dispatchers", "users"
+  add_foreign_key "messages", "senders"
+  add_foreign_key "senders", "mailboxes"
 end

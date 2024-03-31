@@ -1,14 +1,14 @@
 .d-flex.align-items-center.justify-content-between.mb-3
-  h2.h3 = @mailbox_message_dispatcher.name
+  h2.h3 = @message_dispatcher.name
   div
     = render DropdownButtonComponent.new("Options", variant: :secondary, outline: true) do |db|
-      - db.with_menu_item "Delete", href: mailbox_message_dispatcher_path(@mailbox_message_dispatcher),
-                                    icon: :trash, **delete_button_options_for(@mailbox_message_dispatcher)
+      - db.with_menu_item "Delete", href: message_dispatcher_path(@message_dispatcher),
+                                    icon: :trash, **delete_button_options_for(@message_dispatcher)
 
 
 h3.h4 Matching Conditions
 
 p Dispatch a message to its provider when a message matches the following conditions.
 
-- condition_group = @mailbox_message_dispatcher.match_condition_group
+- condition_group = @message_dispatcher.match_condition_group
 = render "condition_groups/manage", condition_group: condition_group

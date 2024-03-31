@@ -1,11 +1,11 @@
 class DispatchMessageJob < ApplicationJob
   queue_as :default
 
-  def perform(mailbox_message)
-    @mailbox_message = mailbox_message
+  def perform(message)
+    @message = message
 
-    mailbox_message_dispatchers.each do |dispatcher|
-      next unless dispatcher.matches_mailbox_message?(mailbox_message)
+    message_dispatchers.each do |message_dispatcher|
+      next unless message_dispatcher.matches_message?(message)
 
       # 1. parse message (account, amount, date?, payee?)
       # 2. enqueue create payment transaction
@@ -17,10 +17,10 @@ class DispatchMessageJob < ApplicationJob
   private
 
   def user
-    @mailbox_message.user
+    @message.user
   end
 
-  def mailbox_message_dispatchers
-    user.mailbox_message_dispatchers
+  def message_dispatchers
+    user.message_dispatchers
   end
 end
