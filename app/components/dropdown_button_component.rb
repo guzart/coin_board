@@ -10,7 +10,7 @@ class DropdownButtonComponent < ApplicationComponent
 
   slim_template <<~SLIM
     = content_tag(:div, class: root_class_name, data: root_data, id:)
-      = render(ButtonComponent.new(label_or_content, **toggle_button_props))
+      = render(ButtonComponent.new(button_content, **toggle_button_props))
       ul.dropdown-menu
         - menu_items.each do |menu_item|
           = menu_item
