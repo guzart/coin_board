@@ -21,6 +21,8 @@
 #  mailbox_sender_id  (mailbox_sender_id => mailbox_senders.id)
 #
 class MailboxMessage < ApplicationRecord
+  include ConditionAttributes
+
   PLAIN_CONTENT_TYPE = "text/plain".freeze
   public_constant :PLAIN_CONTENT_TYPE
 
@@ -30,6 +32,12 @@ class MailboxMessage < ApplicationRecord
   belongs_to :mailbox_sender
 
   has_one :mailbox, through: :mailbox_sender
+  has_one :user, through: :mailbox
+
+  attribute_for_condition :body
+  attribute_for_condition :subject
+  attribute_for_condition :sender_email, -> { mailbox_sender.email }
+  attribute_for_condition :sender_name, -> { mailbox_sender.name }
 
   normalizes :subject, with: ->(subject) { subject.to_s.strip.presence }
 
