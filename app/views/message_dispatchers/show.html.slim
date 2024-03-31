@@ -8,7 +8,12 @@ h3.h4 Match messages
 
 p Dispatch messages to {provider} when they match the following conditions:
 
+
 - message_condition_group = @message_dispatcher.message_condition_group
 = render message_condition_group
 
-= render "message_conditions/form", message_condition: message_condition_group.message_conditions.build
+.mb-4.text-end
+  = render toggle_modal_button(t('helpers.submit.create', model: MessageCondition), selector: "#new_message_condition_modal", outline: true)
+
+= render ModalComponent.new id: "new_message_condition_modal" do |modal|
+  = render "message_conditions/form", message_condition: message_condition_group.message_conditions.build
