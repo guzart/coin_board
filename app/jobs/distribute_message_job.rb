@@ -1,6 +1,7 @@
 class DistributeMessageJob < ApplicationJob
   queue_as :default
 
+  EmailNotFound = Class.new(StandardError)
   NoEmailPartFound = Class.new(StandardError)
   UnauthenticatedEmail = Class.new(StandardError)
 
@@ -12,6 +13,8 @@ class DistributeMessageJob < ApplicationJob
   rescue NoEmailPartFound, UnauthenticatedEmail => e
     logger.info e.message
     delete_mail_depot_email
+  rescue EmailNotFound => e
+    logger.info e.message
   end
 
   private
@@ -20,7 +23,7 @@ class DistributeMessageJob < ApplicationJob
 
   def find_mail_depot_email(email_uid)
     @email = MailDepot::Client.instance.find_email(email_uid)
-    raise "Email with uid #{email_uid} not found" if email.nil?
+    raise EmailNotFound, "Email with uid #{email_uid} not found" if email.nil?
 
     logger.info "Routing email from #{email.from} to #{email.to} with subject: #{email.subject}"
   end

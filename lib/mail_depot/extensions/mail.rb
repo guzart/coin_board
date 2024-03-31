@@ -8,14 +8,14 @@ class Mail::Message
   end
 
   def spf_pass?
-    spf_field&.value&.include?(" spf=pass ")
+    authentication_field&.value&.include?(" spf=pass ")
   end
 
   def dkim_pass?
-    dkim_field&.value&.include?(" dkim=pass ")
+    authentication_field&.value&.include?(" dkim=pass ")
   end
 
   def authentication_field
-    header_fields.find { |field| field.name == "Authentication-Results" }
+    @authentication_field ||= header_fields.find { |field| field.name == "Authentication-Results" }
   end
 end
