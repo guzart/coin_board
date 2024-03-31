@@ -2,7 +2,7 @@
   = render "form", message_dispatcher: @message_dispatcher
 
 .mb-4
-  = render toggle_modal_button(t('helpers.submit.create', model: MessageDispatcher), selector: "#new_message_dispatcher_modal")
+  = render toggle_modal_button(t('helpers.submit.create', model: MessageDispatcher.model_name.human), selector: "#new_message_dispatcher_modal")
 
 - if @message_dispatchers.empty?
   p No message dispatchers yet.
