@@ -3,6 +3,6 @@ class MailboxController < ApplicationController
 
   def show
     @needs_sender_approval = @mailbox.senders.pending.exists?
-    @needs_message_dispatchers = current_user.message_dispatchers.empty?
+    @needs_message_dispatchers = MessageDispatcher.accessible_by(current_ability).empty?
   end
 end

@@ -17,9 +17,9 @@ html
       - if alert
         = render AlertComponent.new(alert, variant: :warning)
 
-      - if current_user
+      - if user_signed_in?
         ul.list-inline
-          li.list-inline-item = link_to 'Mailbox', current_user_root_path
+          li.list-inline-item = link_to 'Mailbox', mailbox_path(current_mailbox)
           li.list-inline-item = link_to 'Senders', senders_path
           li.list-inline-item = link_to 'Message Dispatchers', message_dispatchers_path
           li.list-inline-item = link_to 'Me', user_path(current_user)

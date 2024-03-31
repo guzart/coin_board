@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   include Authentication
 
-  helper_method :current_user_root_path
+  helper_method :current_mailbox
 
   private
 
-  def current_user_root_path
-    mailbox_path(current_user.mailbox)
+  def current_mailbox
+    current_user&.mailbox
   end
 end
