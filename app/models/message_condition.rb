@@ -36,7 +36,7 @@ class MessageCondition < ApplicationRecord
   comparison_operator :matches_regex, ->(operand) { operand.match?(comparison_value) }
 
   validates :comparison_attribute, presence: true
-  validates :comparison_operator, presence: true, inclusion: { in: comparison_operators }
+  validates :comparison_operator, presence: true, inclusion: { in: comparison_operators.map(&:to_s) }
   validates :comparison_value, presence: true
 
   def satisfied_by?(message)
