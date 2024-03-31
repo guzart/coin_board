@@ -4,8 +4,8 @@ module ButtonHelper
   end
 
   def delete_button_options_for(resource, options = {})
-    options.merge(variant: :danger,
-                  data: { turbo_method: :delete,
-                          turbo_confirm: t("messages.confirm_delete", name: resource.to_s) })
+    data = { turbo_method: :delete,
+             turbo_confirm: t("messages.confirm_delete", name: resource.to_s) }
+    { href: url_for(resource), variant: :danger, data: }.deep_merge(options)
   end
 end

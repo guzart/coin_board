@@ -2,7 +2,7 @@
   h2.h3 = @message_dispatcher.name
   div
     = render DropdownButtonComponent.new("Options", variant: :secondary, outline: true) do |db|
-      - db.with_menu_item "Delete", icon: :trash, **delete_button_options_for(@message_dispatcher)
+      - db.with_menu_item "Delete", icon: :delete, **delete_button_options_for(@message_dispatcher)
 
 h3.h4 Match messages
 
@@ -12,8 +12,9 @@ p Dispatch messages to {provider} when they match the following conditions:
 - message_condition_group = @message_dispatcher.message_condition_group
 = render message_condition_group
 
-.mb-4.text-end
+.my-4.text-end
   = render toggle_modal_button(t('helpers.submit.create', model: MessageCondition.model_name.human), selector: "#new_message_condition_modal", outline: true)
 
 = render ModalComponent.new id: "new_message_condition_modal" do |modal|
-  = render "message_conditions/form", message_condition: message_condition_group.message_conditions.build
+  = render "message_conditions/form", message_condition: message_condition_group.message_conditions.build,
+                                      senders_collection: message_comparison_value_senders_collection(@senders)
