@@ -1,16 +1,16 @@
-= render ModalComponent.new id: "add-message-parser-modal" do |modal|
+= render ModalComponent.new id: "add-message-dispatcher-modal" do |modal|
   = render "form", mailbox_message_dispatcher: @mailbox_message_dispatcher
 
 .mb-4
-  = render toggle_modal_button(t('helpers.submit.mailbox_message_dispatcher.create'), selector: "#add-message-parser-modal")
+  = render toggle_modal_button(t('helpers.submit.mailbox_message_dispatcher.create'), selector: "#add-message-dispatcher-modal")
 
 - if @mailbox_message_dispatchers.empty?
-  p No message parsers yet.
+  p No message dispatchers yet.
 
 = render ListGroupComponent.new do |lg|
-  - @mailbox_message_dispatchers.each do |message_parser|
+  - @mailbox_message_dispatchers.each do |message_dispatcher|
     = lg.with_item do
       .d-flex.justify-content-between.align-items-center
-        div = message_parser.name
+        div = message_dispatcher.name
         div
-          = render ButtonComponent.new("View", href: mailbox_message_dispatcher_path(message_parser), outline: true)
+          = render ButtonComponent.new("View", href: mailbox_message_dispatcher_path(message_dispatcher), outline: true)

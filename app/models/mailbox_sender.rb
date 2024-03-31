@@ -36,7 +36,7 @@ class MailboxSender < ApplicationRecord
     return if approved?
 
     update!(status: :approved)
-    enqueue_parse_message_jobs
+    enqueue_dispatch_message_jobs
   end
 
   def block!
@@ -48,9 +48,9 @@ class MailboxSender < ApplicationRecord
 
   private
 
-  def enqueue_parse_message_jobs
-    parse_messages_jobs = mailbox_messages.map { |mm| ParseMessageJob.new(mm) }
-    ActiveJob.perform_all_later(parse_messages_jobs)
+  def enqueue_dispatch_message_jobs
+    dispatch_messages_jobs = mailbox_messages.map { |mm| DispatchMessageJob.new(mm) }
+    ActiveJob.perform_all_later(dispatch_messages_jobs)
   end
 
   def ensure_name_has_value
