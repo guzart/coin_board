@@ -5,7 +5,9 @@ class MessageDispatchersController < ApplicationController
     @message_dispatcher = MessageDispatcher.new
   end
 
-  def show; end
+  def show
+    @senders = Sender.accessible_by(current_ability)
+  end
 
   def create
     redirect_to message_dispatcher_path(@message_dispatcher) if @message_dispatcher.save

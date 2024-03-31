@@ -1,8 +1,10 @@
 import { Application } from "@hotwired/stimulus";
+
 import { CollapseController } from "./collapse_controller.ts";
+import { DropdownButtonController } from "./dropdown_button_controller.ts";
+import { MessageConditionFormController } from "./message_condition_form_controller.ts";
 import { ModalController } from "./modal_controller.ts";
 import { ToggleModalController } from "./toggle_modal_controller.ts";
-import { DropdownButtonController } from "./dropdown_button_controller.ts";
 
 export function start() {
   const application = Application.start();
@@ -15,6 +17,7 @@ export function start() {
   [
     CollapseController,
     DropdownButtonController,
+    MessageConditionFormController,
     ModalController,
     ToggleModalController,
   ].forEach((controller) =>

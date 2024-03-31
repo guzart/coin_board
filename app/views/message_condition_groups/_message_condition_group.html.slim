@@ -2,3 +2,12 @@
 div[id=dom_id(message_condition_group)]
   - if message_condition_group.message_conditions.empty?
     p No conditions yet.
+
+  = render ListGroupComponent.new do |lg|
+    - message_condition_group.message_conditions.each do |message_condition|
+      = lg.with_item do
+        .d-flex.align-items-center.justify-content-between
+          div
+            = message_condition
+          div
+            = render ButtonComponent.new "Remove", **delete_button_options_for(message_condition, outline: true, size: :sm, icon: :delete)

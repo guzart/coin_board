@@ -2,9 +2,15 @@ class MessageConditionsController < ApplicationController
   load_and_authorize_resource
 
   def create
+    @senders = Sender.accessible_by(current_ability)
     return unless @message_condition.save
 
-    @message_condition = MessageCondition.new(message_condition_group: @message_condition.message_condition_group)
+    redirect_to message_dispatcher_path(@message_condition.message_dispatcher)
+  end
+
+  def destroy
+    @message_condition.destroy
+    redirect_to message_dispatcher_path(@message_condition.message_dispatcher), status: :see_other
   end
 
   private

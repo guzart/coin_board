@@ -15,4 +15,6 @@ export abstract class ApplicationController extends Controller {
       `${existingActions} ${actionDescriptors}`,
     );
   }
+
+  protected hideClass = "d-none";
 }

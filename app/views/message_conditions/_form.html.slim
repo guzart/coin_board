@@ -1,7 +1,11 @@
-/# locals: message_condition
-= simple_form_for message_condition do |f|
+/# locals: message_condition, senders_collection
+= simple_form_for message_condition, data: { controller: "message-condition-form" } do |f|
   = f.input :message_condition_group_id, as: :hidden
-  = f.input :comparison_attribute, collection: []
-  = f.input :comparison_operator, collection: comparison_operators_collection
-  = f.input :comparison_value
+  = f.input :comparison_attribute, collection: message_comparison_attributes_collection,
+                                   input_html: { data: { message_condition_form_target: "comparisonAttributeField" } }
+  = f.input :comparison_operator, collection: message_comparison_operators_collection,
+                                  input_html: { data: { message_condition_form_target: "comparisonOperatorField" } }
+  = f.association :sender, collection: senders_collection,
+                           wrapper_html: { data: { message_condition_form_target: "senderFieldGroup" } }
+  = f.input :comparison_value, wrapper_html: { data: { message_condition_form_target: "comparisonValueFieldGroup" } }
   = f.button :submit

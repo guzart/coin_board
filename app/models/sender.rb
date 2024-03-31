@@ -48,6 +48,10 @@ class Sender < ApplicationRecord
     messages.destroy_all
   end
 
+  def to_s
+    "#{name} <#{email}>"
+  end
+
   private
 
   def enqueue_dispatch_message_jobs

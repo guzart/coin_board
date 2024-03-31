@@ -1,3 +1,4 @@
 
 = turbo_stream.replace dom_id(@message_condition) do
-  = render "form", message_condition: @message_condition
+  = render "form", message_condition: @message_condition,
+                   senders_collection: message_comparison_value_senders_collection(@senders)
