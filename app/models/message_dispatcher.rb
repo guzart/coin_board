@@ -2,26 +2,24 @@
 #
 # Table name: message_dispatchers
 #
-#  id                         :integer          not null, primary key
-#  name                       :string
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  message_condition_group_id :integer          not null
-#  user_id                    :integer          not null
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer          not null
 #
 # Indexes
 #
-#  index_message_dispatchers_on_message_condition_group_id  (message_condition_group_id)
-#  index_message_dispatchers_on_user_id                     (user_id)
+#  index_message_dispatchers_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  message_condition_group_id  (message_condition_group_id => message_condition_groups.id)
-#  user_id                     (user_id => users.id)
+#  user_id  (user_id => users.id)
 #
 class MessageDispatcher < ApplicationRecord
   belongs_to :user
-  belongs_to :message_condition_group
+
+  has_one :message_condition_group, dependent: :destroy
 
   before_validation :ensure_message_condition_group
 
@@ -38,8 +36,8 @@ class MessageDispatcher < ApplicationRecord
   private
 
   def ensure_message_condition_group
-    return unless new_record? && message_condition_group_id.nil?
+    return unless new_record? && message_condition_group.nil?
 
-    build_message_condition_group(logical_operator: "AND", user:)
+    build_message_condition_group(logical_operator: "AND")
   end
 end

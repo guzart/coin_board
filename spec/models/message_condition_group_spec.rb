@@ -21,9 +21,9 @@
 #
 require "rails_helper"
 
-RSpec.describe ConditionGroup, type: :model do
+RSpec.describe MessageConditionGroup, type: :model do
   it "validates the logical operator" do
-    condition_group = ConditionGroup.new(logical_operator: "INVALID")
+    condition_group = build(:message_condition_group, logical_operator: "INVALID")
     expect(condition_group).not_to be_valid
     expect(condition_group.errors[:logical_operator]).to include("is not included in the list")
   end
@@ -32,11 +32,11 @@ RSpec.describe ConditionGroup, type: :model do
     it "evaluates the logical operator AND" do
       object = double("Object")
       condition_group = build(
-        :condition_group,
+        :message_condition_group,
         logical_operator: "AND",
-        conditions: [
-          build(:condition, :exactly_matches_subject, subject: "Welcome!"),
-          build(:condition, :contains_body, body: "soon")
+        message_conditions: [
+          build(:message_condition, :exactly_matches_subject, subject: "Welcome!"),
+          build(:message_condition, :contains_body, body: "soon")
         ]
       )
 

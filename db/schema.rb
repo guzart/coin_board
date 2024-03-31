@@ -36,11 +36,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_011045) do
   end
 
   create_table "message_condition_groups", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "message_dispatcher_id", null: false
     t.string "logical_operator", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_message_condition_groups_on_user_id"
+    t.index ["message_dispatcher_id"], name: "index_message_condition_groups_on_message_dispatcher_id"
   end
 
   create_table "message_conditions", force: :cascade do |t|
@@ -58,10 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_011045) do
   create_table "message_dispatchers", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name"
-    t.integer "message_condition_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["message_condition_group_id"], name: "index_message_dispatchers_on_message_condition_group_id"
     t.index ["user_id"], name: "index_message_dispatchers_on_user_id"
   end
 
@@ -116,10 +114,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_011045) do
   end
 
   add_foreign_key "mailboxes", "users"
-  add_foreign_key "message_condition_groups", "users"
+  add_foreign_key "message_condition_groups", "message_dispatchers"
   add_foreign_key "message_conditions", "message_condition_groups"
   add_foreign_key "message_conditions", "senders"
-  add_foreign_key "message_dispatchers", "message_condition_groups"
   add_foreign_key "message_dispatchers", "users"
   add_foreign_key "messages", "senders"
   add_foreign_key "senders", "mailboxes"

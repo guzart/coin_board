@@ -1,8 +1,8 @@
-= render ModalComponent.new id: "add-message-dispatcher-modal" do |modal|
+= render ModalComponent.new id: "new_message_dispatcher_modal" do |modal|
   = render "form", message_dispatcher: @message_dispatcher
 
 .mb-4
-  = render toggle_modal_button(t('helpers.submit.create', model: MessageDispatcher), selector: "#add-message-dispatcher-modal")
+  = render toggle_modal_button(t('helpers.submit.create', model: MessageDispatcher), selector: "#new_message_dispatcher_modal")
 
 - if @message_dispatchers.empty?
   p No message dispatchers yet.

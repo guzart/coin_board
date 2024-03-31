@@ -1,0 +1,7 @@
+/# locals: message_condition
+= simple_form_for message_condition do |f|
+  = f.input :message_condition_group_id, as: :hidden
+  = f.input :comparison_attribute, collection: []
+  = f.input :comparison_operator, collection: comparison_operators_collection
+  = f.input :comparison_value
+  = f.button :submit
