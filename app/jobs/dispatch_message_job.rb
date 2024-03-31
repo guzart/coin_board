@@ -7,8 +7,8 @@ class DispatchMessageJob < ApplicationJob
     message_dispatchers.each do |message_dispatcher|
       next unless message_dispatcher.matches_message?(message)
 
-      # 1. parse message (account, amount, date?, payee?)
-      # 2. enqueue create payment transaction
+      # 1. parse transaction from message (amount, date?, payee?)
+      # 2. dispatch transaction to provider
       # 3. destroy message
       # raise NotImplementedError
     end

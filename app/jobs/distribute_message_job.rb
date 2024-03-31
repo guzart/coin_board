@@ -2,11 +2,15 @@ class DistributeMessageJob < ApplicationJob
   queue_as :default
 
   NoEmailPartFound = Class.new(StandardError)
+  UnauthenticatedEmail = Class.new(StandardError)
 
   def perform(email_uid)
     find_mail_depot_email(email_uid)
-    validate_mail_depot_email
+    validated_authenticated_email!
     route_mail_depot_email_to_mailboxes
+    delete_mail_depot_email
+  rescue NoEmailPartFound, UnauthenticatedEmail => e
+    logger.info e.message
     delete_mail_depot_email
   end
 
@@ -21,9 +25,8 @@ class DistributeMessageJob < ApplicationJob
     logger.info "Routing email from #{email.from} to #{email.to} with subject: #{email.subject}"
   end
 
-  def validate_mail_depot_email
-    # TODO: validate either SPF or DKIM pass
-    raise NotImplementedError
+  def validated_authenticated_email!
+    raise UnauthenticatedEmail unless email.authenticated?
   end
 
   def route_mail_depot_email_to_mailboxes
@@ -31,8 +34,6 @@ class DistributeMessageJob < ApplicationJob
       sender = mailbox.senders.create_or_find_by!(email: sender_email)
       message = create_message(sender)
       DispatchMessageJob.perform_later(message) if sender.approved?
-    rescue NoEmailPartFound
-      logger.error "No email parts found: #{email_details}"
     end
   end
 
@@ -72,7 +73,7 @@ class DistributeMessageJob < ApplicationJob
       email_part = email.parts.find { |part| part.content_type =~ /plain/ }
     end
 
-    raise NoEmailPartFound if email_part.blank?
+    raise NoEmailPartFound, "Email does not have a plain or html content part" if email_part.blank?
 
     { body: decode_body(email_part), content_type: }
   end
