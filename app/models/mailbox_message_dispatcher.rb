@@ -27,15 +27,19 @@ class MailboxMessageDispatcher < ApplicationRecord
 
   validates :name, presence: true
 
-  accepts_nested_attributes_for :match_condition_group, update_only: true
-
   def to_s
     name
+  end
+
+  def matches_mailbox_message?(mailbox_message)
+    match_condition_group.satisfied_by?(mailbox_message)
   end
 
   private
 
   def ensure_match_condition_group
-    build_match_condition_group(logical_operator: "AND", user:) if new_record? && match_condition_group_id.nil?
+    return unless new_record? && match_condition_group_id.nil?
+
+    build_match_condition_group(logical_operator: "AND", user:)
   end
 end
