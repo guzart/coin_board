@@ -28,6 +28,8 @@ class MessageConditionGroup < ApplicationRecord
   belongs_to :message_dispatcher
   has_many :message_conditions, dependent: :destroy
 
+  has_one :user, through: :message_dispatcher
+
   validates :logical_operator, presence: true, inclusion: { in: logical_operators }
 
   def satisfied_by?(message)

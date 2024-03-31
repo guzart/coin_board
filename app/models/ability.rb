@@ -34,9 +34,8 @@ class Ability
     can :manage, Sender, mailbox: { user: }
     can :manage, Message, sender: { mailbox: { user: } }
 
-    can(:manage, MessageConditionGroup, user:)
-    can :manage, MessageCondition, message_condition_group: { user: }
-
     can(:manage, MessageDispatcher, user:)
+    can :manage, MessageConditionGroup, message_dispatcher: { user: }
+    can :manage, MessageCondition, message_condition_group: { user: }
   end
 end
