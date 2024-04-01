@@ -29,8 +29,16 @@ class MessageDispatcher < ApplicationRecord
     name
   end
 
-  def matches_mailbox_message?(mailbox_message)
-    message_condition_group.satisfied_by?(mailbox_message)
+  def matches_message?(message)
+    message_condition_group.satisfied_by?(message)
+  end
+
+  def parse_transaction(message)
+    raise NotImplementedError
+  end
+
+  def dispatch_transaction(transaction_attrs)
+    raise NotImplementedError
   end
 
   private
