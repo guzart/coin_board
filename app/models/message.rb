@@ -6,6 +6,7 @@
 #  body         :text
 #  content_type :string
 #  sent_at      :datetime
+#  status       :integer          default("pending"), not null
 #  subject      :string
 #  uid          :bigint
 #  created_at   :datetime         not null
@@ -34,6 +35,10 @@ class Message < ApplicationRecord
 
   has_one :mailbox, through: :sender
   has_one :user, through: :mailbox
+
+  enum status: %i[pending no_dispatcher dispatched]
+
+  scope :expired, -> { dispatched.where("updated_at < ?", 2.days.ago) }
 
   attribute_for_condition :body
   attribute_for_condition :subject
