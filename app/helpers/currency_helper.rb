@@ -1,7 +1,13 @@
 module CurrencyHelper
-  def currencies_collections
+  def money_currencies_collection
     Money::Currency.all.map do |currency|
       [currency.name, currency.iso_code]
+    end
+  end
+
+  def currencies_collection(currencies)
+    currencies.map do |currency|
+      [currency.details[:name], currency.id]
     end
   end
 

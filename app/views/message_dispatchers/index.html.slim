@@ -1,5 +1,5 @@
 = render ModalComponent.new id: "new_message_dispatcher_modal" do |modal|
-  = render "form", message_dispatcher: @message_dispatcher
+  = render "form", message_dispatcher: @message_dispatcher, currencies: @currencies
 
 .mb-4
   = render toggle_modal_button(t('helpers.submit.create', model: MessageDispatcher.model_name.human), selector: "#new_message_dispatcher_modal")

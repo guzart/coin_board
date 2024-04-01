@@ -1,4 +1,5 @@
-/# locals: message_dispatcher
+/# locals: (message_dispatcher:, currencies:)
 = simple_form_for message_dispatcher do |f|
-  = f.input :name, required: false
+  = f.input :name
+  = f.association :currency, collection: currencies_collection(currencies)
   = f.button :submit

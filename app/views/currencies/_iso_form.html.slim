@@ -1,5 +1,5 @@
 /# locals: (currency:)
 = simple_form_for currency, namespace: :iso do |f|
   = hidden_field_tag :form_name, "iso"
-  = f.input :iso_code, label: "Name", collection: currencies_collections
+  = f.input :iso_code, label: "Name", collection: money_currencies_collection
   = f.button :submit

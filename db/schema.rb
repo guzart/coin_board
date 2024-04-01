@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_01_005616) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_01_021904) do
   create_table "currencies", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name"
@@ -73,6 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_01_005616) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "currency_id", null: false
+    t.index ["currency_id"], name: "index_message_dispatchers_on_currency_id"
     t.index ["user_id"], name: "index_message_dispatchers_on_user_id"
   end
 
@@ -132,6 +134,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_01_005616) do
   add_foreign_key "message_condition_groups", "message_dispatchers"
   add_foreign_key "message_conditions", "message_condition_groups"
   add_foreign_key "message_conditions", "senders"
+  add_foreign_key "message_dispatchers", "currencies"
   add_foreign_key "message_dispatchers", "users"
   add_foreign_key "messages", "senders"
   add_foreign_key "senders", "mailboxes"
