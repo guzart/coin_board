@@ -1,4 +1,4 @@
-/# locals: message_condition, senders_collection
+/# locals: (message_condition:, senders_collection:)
 = simple_form_for message_condition, data: { controller: "message-condition-form" } do |f|
   = f.input :message_condition_group_id, as: :hidden
   = f.input :comparison_attribute, collection: message_comparison_attributes_collection,
