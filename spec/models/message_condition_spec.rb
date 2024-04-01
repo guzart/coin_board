@@ -1,24 +1,25 @@
 # == Schema Information
 #
-# Table name: conditions
+# Table name: message_conditions
 #
-#  id                   :integer          not null, primary key
-#  comparison_attribute :string
-#  comparison_operator  :string           not null
-#  comparison_value     :string
-#  lower_bound          :string
-#  upper_bound          :string
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  condition_group_id   :integer          not null
+#  id                         :integer          not null, primary key
+#  comparison_attribute       :string
+#  comparison_operator        :string
+#  comparison_value           :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  message_condition_group_id :integer          not null
+#  sender_id                  :integer
 #
 # Indexes
 #
-#  index_conditions_on_condition_group_id  (condition_group_id)
+#  index_message_conditions_on_message_condition_group_id  (message_condition_group_id)
+#  index_message_conditions_on_sender_id                   (sender_id)
 #
 # Foreign Keys
 #
-#  condition_group_id  (condition_group_id => condition_groups.id)
+#  message_condition_group_id  (message_condition_group_id => message_condition_groups.id)
+#  sender_id                   (sender_id => senders.id)
 #
 require "rails_helper"
 
