@@ -25,8 +25,6 @@ class Sender < ApplicationRecord
 
   enum status: %i[pending blocked approved]
 
-  scope :pending, -> { where(status: :pending) }
-
   before_validation :ensure_name_has_value
 
   normalizes :email, with: ->(email) { Utils::EmailNormalizer.normalize(email) }
