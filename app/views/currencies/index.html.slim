@@ -1,0 +1,24 @@
+.mb-4.d-flex.column-gap-2
+  = render toggle_modal_button(t('helpers.submit.create', model: Currency.model_name.human),
+                               selector: "#new_iso_currency_modal")
+  = render toggle_modal_button(t('helpers.submit.create', model: "Custom #{Currency.model_name.human.downcase}"),
+                               selector: "#new_custom_currency_modal", outline: true)
+
+
+- if @currencies.empty?
+  p No currencies found
+- else
+  = render ListGroupComponent.new do |lg|
+    - @currencies.each do |currency|
+      - lg.with_item do
+        .d-flex.align-items-center.justify-content-between
+          div = print_currency_details currency
+          div
+            = render ButtonComponent.new "Delete", **delete_button_options_for(currency), size: :sm, outline: true, icon: :delete
+
+
+= render ModalComponent.new id: "new_iso_currency_modal" do |modal|
+  = render 'iso_form', currency: Currency.new
+
+= render ModalComponent.new id: "new_custom_currency_modal" do |modal|
+  = render 'custom_form', currency: Currency.new

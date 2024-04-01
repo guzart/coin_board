@@ -22,6 +22,7 @@ html
           li.list-inline-item = link_to 'Mailbox', mailbox_path(current_mailbox)
           li.list-inline-item = link_to 'Senders', senders_path
           li.list-inline-item = link_to 'Message Dispatchers', message_dispatchers_path
+          li.list-inline-item = link_to 'Currencies', currencies_path
           li.list-inline-item = link_to 'Me', user_path(current_user)
           li.list-inline-item = link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }
 

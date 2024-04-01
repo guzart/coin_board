@@ -1,0 +1,4 @@
+- is_custom = @form_name == "custom"
+- prefix = is_custom ? "custom" : "iso"
+= turbo_stream.replace "#{prefix}_#{dom_id(@currency)}" do
+  = render (is_custom ? "custom_form" : "iso_form"), currency: @currency

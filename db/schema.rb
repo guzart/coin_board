@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_233403) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_01_005616) do
+  create_table "currencies", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name"
+    t.string "iso_code"
+    t.string "symbol"
+    t.integer "subunit_to_unit"
+    t.string "decimal_mark"
+    t.string "thousands_separator"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_currencies_on_user_id"
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -114,6 +127,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_233403) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "currencies", "users"
   add_foreign_key "mailboxes", "users"
   add_foreign_key "message_condition_groups", "message_dispatchers"
   add_foreign_key "message_conditions", "message_condition_groups"

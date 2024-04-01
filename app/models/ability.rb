@@ -30,6 +30,7 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
 
     can :manage, User, id: user.id
+    can(:manage, Currency, user:)
     can(:manage, Mailbox, user:)
     can :manage, Sender, mailbox: { user: }
     can :manage, Message, sender: { mailbox: { user: } }

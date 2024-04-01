@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: %i[show]
+  resources :currencies, only: %i[index create destroy]
   resources :mailbox, only: %i[show]
   resources :senders, only: %i[index show] do
     member do

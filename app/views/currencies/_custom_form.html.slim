@@ -1,0 +1,10 @@
+/# locals: currency
+= simple_form_for currency, namespace: :custom do |f|
+  = hidden_field_tag :form_name, "custom"
+  = f.input :iso_code, as: :hidden, input_html: { value: Currency::CUSTOM_ISO_CODE }
+  = f.input :name
+  = f.input :symbol
+  = f.input :subunit_to_unit
+  = f.input :decimal_mark
+  = f.input :thousands_separator
+  = f.button :submit
