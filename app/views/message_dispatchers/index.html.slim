@@ -9,7 +9,7 @@
 
 = render ListGroupComponent.new do |lg|
   - @message_dispatchers.each do |message_dispatcher|
-    = lg.with_item do
+    - lg.with_item do
       .d-flex.justify-content-between.align-items-center
         div = message_dispatcher.name
         div

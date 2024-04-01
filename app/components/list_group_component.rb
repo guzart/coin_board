@@ -5,7 +5,8 @@ class ListGroupComponent < ApplicationComponent
 
   slim_template <<~SLIM
     = content_tag :ul, class: root_class, id:, data: do
-      = content
+      - items.each do |item|
+        = item
   SLIM
 
   private

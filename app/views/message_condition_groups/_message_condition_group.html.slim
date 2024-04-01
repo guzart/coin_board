@@ -5,7 +5,7 @@ div[id=dom_id(message_condition_group)]
 
   = render ListGroupComponent.new do |lg|
     - message_condition_group.message_conditions.each do |message_condition|
-      = lg.with_item do
+      - lg.with_item do
         .d-flex.align-items-center.justify-content-between
           div
             = message_condition
