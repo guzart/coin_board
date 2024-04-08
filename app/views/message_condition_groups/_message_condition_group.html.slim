@@ -1,7 +1,8 @@
 /# locals: (message_condition_group:)
 div[id=dom_id(message_condition_group)]
   - if message_condition_group.message_conditions.empty?
-    p No conditions yet.
+    = render AlertComponent.new(variant: :info) do
+      | This dispatcher is disabled. Enable it by adding a message condition.
 
   = render ListGroupComponent.new do |lg|
     - message_condition_group.message_conditions.each do |message_condition|

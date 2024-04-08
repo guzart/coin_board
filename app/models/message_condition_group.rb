@@ -32,6 +32,10 @@ class MessageConditionGroup < ApplicationRecord
 
   validates :logical_operator, presence: true, inclusion: { in: logical_operators }
 
+  def empty?
+    message_conditions.empty?
+  end
+
   def satisfied_by?(message)
     case logical_operator
     when AND
