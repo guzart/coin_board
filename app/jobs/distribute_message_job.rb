@@ -62,6 +62,7 @@ class DistributeMessageJob < ApplicationJob
 
   def create_message(sender)
     sender.messages.find_or_create_by!(uid: email.uid) do |message|
+      # TODO: add email date attribute
       other_attrs = { email_id: email.message_id, subject: email.subject }
       message.attributes = message_content_attrs.merge(other_attrs)
     end
