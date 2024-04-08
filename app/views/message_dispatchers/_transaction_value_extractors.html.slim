@@ -1,0 +1,15 @@
+/# locals: (message_dispatcher:)
+- transaction_value_extractors = message_dispatcher.transaction_value_extractors
+#transaction_value_extractors
+  - if transaction_value_extractors.empty?
+    = render AlertComponent.new(variant: :info) do
+      | This dispatcher is disabled. Enable it by adding a message condition.
+
+  = render ListGroupComponent.new do |lg|
+    - transaction_value_extractors.each do |transaction_value_extractor|
+      - lg.with_item do
+        .d-flex.align-items-center.justify-content-between
+          div
+            = render transaction_value_extractor
+          div
+            = render ButtonComponent.new "Remove", **delete_button_options_for(transaction_value_extractor, outline: true, size: :sm, icon: :delete)

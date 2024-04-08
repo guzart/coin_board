@@ -22,8 +22,10 @@ class DispatchMessageJob < ApplicationJob
 
   def process_message_dispatchers
     matching_message_dispatchers.each do |message_dispatcher|
-      transaction_attrs = message_dispatcher.parse_transaction(@message)
-      message_dispatcher.dispatch_transaction(transaction_attrs)
+      transaction = message_dispatcher.extract_transaction(@message)
+      next if transaction.empty?
+
+      message_dispatcher.dispatch_transaction(transaction)
     end
   end
 

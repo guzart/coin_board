@@ -24,6 +24,7 @@ class MessageDispatcher < ApplicationRecord
   belongs_to :currency
 
   has_one :message_condition_group, dependent: :destroy
+  has_many :transaction_value_extractors, dependent: :destroy
 
   before_validation :ensure_message_condition_group
 
@@ -37,8 +38,13 @@ class MessageDispatcher < ApplicationRecord
     message_condition_group.satisfied_by?(message)
   end
 
-  def parse_transaction(message)
-    raise NotImplementedError
+  def extract_transaction(message)
+    parsing_currency = currency
+    transaction_value_extractors.map do |transaction_value_extractor|
+      field = transaction_value_extractor.field
+      value = transaction_value_extractor.extract(message.body, currency: parsing_currency)
+      value.present? ? [field, value] : nil
+    end.compact.to_h
   end
 
   def dispatch_transaction(transaction_attrs)

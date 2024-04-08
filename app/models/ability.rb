@@ -38,5 +38,6 @@ class Ability
     can(:manage, MessageDispatcher, user:)
     can :manage, MessageConditionGroup, message_dispatcher: { user: }
     can :manage, MessageCondition, message_condition_group: { user: }
+    can :manage, TransactionValueExtractor, message_dispatcher: { user: }
   end
 end

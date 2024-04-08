@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   end
 
   resources :message_dispatchers, only: %i[index show create destroy]
-
   resources :message_conditions, only: %i[create destroy]
+  resources :transaction_value_extractors, only: %i[create destroy]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

@@ -1,0 +1,7 @@
+/# locals: (transaction_value_extractor:)
+= simple_form_for transaction_value_extractor do |f|
+  = f.input :message_dispatcher_id, as: :hidden
+  = f.input :field, as: :enum_select, enum: TransactionValueExtractor.fields
+  = f.input :extraction_type, as: :enum_select, enum: TransactionValueExtractor.extraction_types
+  = f.input :extraction_value
+  = f.button :submit
