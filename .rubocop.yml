@@ -2,6 +2,7 @@ AllCops:
   TargetRubyVersion: 3.3.0
   Exclude:
     - "db/migrate/*.rb"
+    - "db/schema.rb"
 
 Metrics/BlockLength:
   Exclude:
