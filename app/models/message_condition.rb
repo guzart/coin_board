@@ -44,7 +44,7 @@ class MessageCondition < ApplicationRecord
   validates :sender, presence: true, if: :sender_comparison?
 
   def satisfied_by?(message)
-    operand = message.condition_attribute(comparison_attribute)
+    operand = message.condition_attribute(comparison_attribute.to_sym)
     evaluate_comparison(comparison_operator, operand)
   end
 
