@@ -1,4 +1,3 @@
-
 h2
   = @sender.name
 
@@ -19,7 +18,8 @@ h3.h4.mt-8 Messages
         - acc_item.with_header do
           .text-truncate
             = message.subject || "[No subject]"
-            span.text-xs.text-secondary.ms-4 = message.created_at
+            span.text-xs.text-secondary.mx-4 = message.created_at
+            = render StatusBadgeComponent.new(message.status)
         - acc_item.with_body do
           = sanitize message.body
 
