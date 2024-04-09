@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export abstract class ApplicationController extends Controller {
   protected addActionDescriptors(
-    actions: Record<string, (args: any[]) => any>,
+    actions: Record<string, (_args: any[]) => any>,
   ) {
     const existingActions = this.element.getAttribute("data-action") || "";
     const actionDescriptors = Object.entries(actions)
