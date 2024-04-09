@@ -1,6 +1,4 @@
-@import "bootstrap/scss/mixins/banner";
-@include bsBanner("");
-
+@import "./bootstrap_banner";
 
 // Configuration
 @import "bootstrap/scss/functions";
@@ -8,7 +6,7 @@
 @import "bootstrap/scss/variables-dark";
 
 // Variable extensions
-@import "./_variables_extension.scss";
+@import "./variables_extension";
 
 // Continue configuration
 @import "bootstrap/scss/maps";
@@ -16,7 +14,7 @@
 @import "bootstrap/scss/utilities";
 
 // Utilities extensions
-@import "./_utilities_extension.scss";
+@import "./utilities_extension";
 
 // Layout & components
 @import "bootstrap/scss/root";
