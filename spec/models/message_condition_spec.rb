@@ -24,13 +24,13 @@
 require "rails_helper"
 
 RSpec.describe MessageCondition, type: :model do
-  it "validates the comparison operator" do
+  it "validates the comparison operator is not invalid" do
     message_condition = build(:message_condition, comparison_operator: "INVALID")
     expect(message_condition).not_to be_valid
     expect(message_condition.errors[:comparison_operator]).to include("is not included in the list")
   end
 
-  it "validates the comparison value" do
+  it "validates the comparison value is not blank" do
     message_condition = build(:message_condition, comparison_value: "")
     expect(message_condition).not_to be_valid
     expect(message_condition.errors[:comparison_value]).to include("can't be blank")
