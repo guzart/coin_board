@@ -33,6 +33,10 @@
   ],
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",
-    "prettier": "^3.2.5"
+    "postcss-scss": "^4.0.9",
+    "prettier": "^3.2.5",
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-scss": "^6.2.1"
   }
 }

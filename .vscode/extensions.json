@@ -4,6 +4,7 @@
     "sianglim.slim",
     "rubocop.vscode-rubocop",
     "connorshea.vscode-ruby-test-adapter",
-    "hbenl.vscode-test-explorer"
+    "hbenl.vscode-test-explorer",
+    "stylelint.vscode-stylelint"
   ]
 }

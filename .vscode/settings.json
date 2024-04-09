@@ -4,10 +4,12 @@
     "editor.defaultFormatter": "rubocop.vscode-rubocop",
     "editor.formatOnSave": true
   },
+  "scss.validate": false,
   "search.exclude": {
     "**/node_modules": true,
     "**/bower_components": true,
     "**/*.code-search": true,
     "vendor/assets": true
-  }
+  },
+  "stylelint.validate": ["css", "scss"]
 }

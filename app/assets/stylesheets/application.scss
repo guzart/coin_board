@@ -1,5 +1,6 @@
-@import "./bootstrap/_custom.scss";
+@import "./bootstrap/custom";
 
 $fa-font-path: "fontawesome";
-@import "fontawesome-free-6.5.1-web/scss/fontawesome.scss";
-@import "fontawesome-free-6.5.1-web/scss/solid.scss";
+
+@import "fontawesome-free-6.5.1-web/scss/fontawesome";
+@import "fontawesome-free-6.5.1-web/scss/solid";
