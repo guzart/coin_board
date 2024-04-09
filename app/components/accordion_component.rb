@@ -4,7 +4,7 @@ class AccordionComponent < ApplicationComponent
   }
 
   slim_template <<~SLIM
-    = content_tag :div, class: root_class, id: id_with_fallback, data: do
+    div[class=root_class id=id_with_fallback data=data]
       - items.each do |item|
         = item
   SLIM
@@ -20,35 +20,52 @@ class AccordionComponent < ApplicationComponent
     option :parent_id
     option :header_tag, default: proc { :h2 }
 
-    renders_one :header, ->(&block) { content_tag(:span, &block) }
-    renders_one :body, lambda { |content: nil, &block|
-      content_tag(:div, id: collapsible_target_id, class: "accordion-collapse collapse",
-                        data: { bs_parent: "##{parent_id}" }) do
-        content_tag(:div, content, class: "accordion-body", &block)
-      end
+    renders_one :header
+    renders_one :body, lambda { |text = nil, **options, &block|
+      BodyComponent.new(text, id: collapsible_target_id, data: body_data, **options, &block)
     }
 
     slim_template <<~SLIM
       .accordion-item
-        = content_tag(header_tag, class: "accordion-header") do
+        *{tag: header_tag, class: "accordion-header"}
           = header_button
         = body
     SLIM
 
     private
 
-    def text_or_content
+    def text_header_or_content
       text || header || content
     end
 
     def header_button
       data = { controller: "collapse", bs_toggle: "collapse", bs_target: "##{collapsible_target_id}" }
-      button_tag text_or_content, type: :button, class: "accordion-button collapsed", data:,
-                                  aria: { expanded: "false", controls: collapsible_target_id }
+      button_tag text_header_or_content, type: :button, class: "accordion-button collapsed", data:,
+                                         aria: { expanded: "false", controls: collapsible_target_id }
     end
 
     def collapsible_target_id
       "#{id_with_fallback}-body"
+    end
+
+    def body_data
+      { bs_parent: "##{parent_id}" }
+    end
+
+    class BodyComponent < ApplicationComponent
+      param :text, default: proc { nil }
+
+      slim_template <<~SLIM
+        .accordion-collapse.collapse[id=id data=data]
+          .accordion-body
+            = text_or_content
+      SLIM
+
+      private
+
+      def text_or_content
+        text || content
+      end
     end
   end
 end

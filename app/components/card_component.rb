@@ -1,13 +1,9 @@
 class CardComponent < ApplicationComponent
-  renders_one :title, lambda { |content = nil, tag: :h5, &block|
-    content_tag(tag, content, class: "card-title", &block)
-  }
-  renders_many :texts, lambda { |content = nil, &block|
-    content_tag(:p, content, class: "card-text", &block)
-  }
+  renders_one :title, "TitleComponent"
+  renders_many :texts, "TextComponent"
 
   slim_template <<~SLIM
-    = content_tag :div, class: root_class, data:, id: do
+    div[class=root_class data=data id=id]
       .card-body
         = content
   SLIM
@@ -16,5 +12,24 @@ class CardComponent < ApplicationComponent
 
   def root_class
     "card #{class_name}"
+  end
+
+  class TitleComponent < ApplicationComponent
+    param :text, default: proc { nil }
+    option :tag, default: proc { :h5 }
+
+    slim_template <<~SLIM
+      *{ tag: tag, class: "card-title" }
+        = text || content
+    SLIM
+  end
+
+  class TextComponent < ApplicationComponent
+    param :text, default: proc { nil }
+
+    slim_template <<~SLIM
+      p.card-text
+        = text || content
+    SLIM
   end
 end

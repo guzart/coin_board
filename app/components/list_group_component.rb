@@ -1,10 +1,8 @@
 class ListGroupComponent < ApplicationComponent
-  renders_many :items, lambda { |content = nil, &block|
-    content_tag :li, content, class: "list-group-item", &block
-  }
+  renders_many :items, "ItemComponent"
 
   slim_template <<~SLIM
-    = content_tag :ul, class: root_class, id:, data: do
+    ul[class=root_class id=id data=data]
       - items.each do |item|
         = item
   SLIM
@@ -13,5 +11,14 @@ class ListGroupComponent < ApplicationComponent
 
   def root_class
     "list-group #{class_name}"
+  end
+
+  class ItemComponent < ApplicationComponent
+    param :text, default: proc { nil }
+
+    slim_template <<~SLIM
+      li.list-group-item
+        = text || content
+    SLIM
   end
 end

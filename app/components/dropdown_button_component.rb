@@ -9,7 +9,7 @@ class DropdownButtonComponent < ApplicationComponent
   option :show_toggle_icon, default: proc { true }
 
   slim_template <<~SLIM
-    = content_tag(:div, class: root_class_name, data: root_data, id:)
+    div[class=root_class_name data=root_data id=id]
       = render(ButtonComponent.new(button_content, **toggle_button_props))
       ul.dropdown-menu
         - menu_items.each do |menu_item|
@@ -44,7 +44,7 @@ class DropdownButtonComponent < ApplicationComponent
     option :divider, default: proc { false }
 
     slim_template <<~SLIM
-      = content_tag :li, class: class_name do
+      li[class=class_name]
         - if divider
           hr.dropdown-divider
         - else

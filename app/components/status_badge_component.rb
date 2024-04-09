@@ -3,10 +3,11 @@ class StatusBadgeComponent < ApplicationComponent
   option :variant, default: proc { :primary }
 
   slim_template <<~SLIM
-    = content_tag :div, class: root_class, id:, data: do
-      = content_tag :div, class: status_wrapper_class do
-        = content_tag :div, "", class: status_class
-      = content_tag :p, text_or_content, class: content_class
+    div[class=root_class id=id data=data]
+      div[class=status_wrapper_class]
+        div[class=status_class] = ""
+      p[class=content_class]
+        = text || content
   SLIM
 
   private
@@ -25,9 +26,5 @@ class StatusBadgeComponent < ApplicationComponent
 
   def content_class
     "d-inline text-xs lh-base text-secondary m-0"
-  end
-
-  def text_or_content
-    text || content
   end
 end

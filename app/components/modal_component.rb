@@ -3,12 +3,13 @@ class ModalComponent < ApplicationComponent
   option :title_tag, default: proc { :h5 }
 
   slim_template <<~SLIM
-    = content_tag(:div, class: root_class, id:, data: root_data, aria: root_aria, tabindex: "-1") do
+    div[class=root_class id=id data=root_data aria=root_aria tabindex="-1"]
       .modal-dialog
         .modal-content
           - if title.present?
             .modal-header
-              = content_tag title_tag, title, id: title_id, class: "modal-title"
+              *{ tag: title_tag, id: title_id, class: "modal-title" }
+                = title
               = close_button
           .modal-body
             = content
