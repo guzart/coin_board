@@ -4,7 +4,7 @@ module IconHelper
     style_classname = "fa-regular"
     icon_classname = "fa-#{icon_name}"
     class_name = [style_classname, icon_classname, icon_animate_classname(animate)].compact.join(" ")
-    content_tag(:i, "", { class: class_name }, true)
+    content_tag(:i, "", { class: class_name })
   end
 
   def icon_animate_classname(name)
