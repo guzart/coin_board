@@ -5,6 +5,7 @@
     "rubocop.vscode-rubocop",
     "connorshea.vscode-ruby-test-adapter",
     "hbenl.vscode-test-explorer",
-    "stylelint.vscode-stylelint"
+    "stylelint.vscode-stylelint",
+    "dbaeumer.vscode-eslint"
   ]
 }

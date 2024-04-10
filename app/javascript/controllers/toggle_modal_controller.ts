@@ -13,7 +13,7 @@ export class ToggleModalController extends ApplicationController {
   declare readonly selectorValue: string;
 
   connect(): void {
-    this.addActionDescriptors({ click: this.toggleModal });
+    this.addActionDescriptors({ click: this.toggleModal.name });
   }
 
   toggleModal() {

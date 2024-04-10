@@ -1,9 +1,10 @@
 {
-  "cSpell.words": ["offcanvas", "stylesheet"],
   "[ruby]": {
     "editor.defaultFormatter": "rubocop.vscode-rubocop",
     "editor.formatOnSave": true
   },
+  "cSpell.words": ["offcanvas", "stylesheet"],
+  "eslint.experimental.useFlatConfig": true,
   "scss.validate": false,
   "search.exclude": {
     "**/node_modules": true,

@@ -1,14 +1,10 @@
 import { Controller } from "@hotwired/stimulus";
 
 export abstract class ApplicationController extends Controller {
-  protected addActionDescriptors(
-    actions: Record<string, (_args: any[]) => any>,
-  ) {
+  protected addActionDescriptors(actions: Record<string, string>) {
     const existingActions = this.element.getAttribute("data-action") || "";
     const actionDescriptors = Object.entries(actions)
-      .map(([name, handler]) => {
-        return `${name}->${this.identifier}#${handler.name}`;
-      })
+      .map(([name, handler]) => `${name}->${this.identifier}#${handler}`)
       .filter((descriptor) => !existingActions.includes(descriptor))
       .join(" ");
 

@@ -1,5 +1,9 @@
-declare module "@hotwired/turbo-rails";
+declare module "@hotwired/turbo-rails" {
+  export const Turbo: {
+    start: () => void;
+  };
+}
 
 declare interface Window {
-  Stimulus: any;
+  Stimulus: unknown;
 }

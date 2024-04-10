@@ -20,7 +20,7 @@ export class MessageConditionFormController extends ApplicationController {
   declare readonly senderFieldGroupTarget: HTMLDivElement;
 
   connect() {
-    this.addActionDescriptors({ input: this.updateFieldsVisibility });
+    this.addActionDescriptors({ input: this.updateFieldsVisibility.name });
     this.updateFieldsVisibility();
   }
 

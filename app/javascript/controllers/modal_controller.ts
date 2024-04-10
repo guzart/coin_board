@@ -12,7 +12,7 @@ export class ModalController extends ApplicationController {
   connect() {
     this.modal = new Modal(this.element);
     this.addActionDescriptors({
-      [TOGGLE_MODAL_EVENT_NAME]: this.toggleModal,
+      [TOGGLE_MODAL_EVENT_NAME]: this.toggleModal.name,
     });
   }
 
