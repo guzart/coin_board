@@ -3,7 +3,7 @@ module IconHelper
     icon_name = icon_name_for_alias(name).to_s.gsub("_", "-")
     style_classname = "fa-regular"
     icon_classname = "fa-#{icon_name}"
-    "<i class='#{style_classname} #{icon_classname} #{icon_animate_classname(animate)}' />".html_safe
+    "<i class='#{style_classname} #{icon_classname} #{icon_animate_classname(animate)}'></i>".html_safe
   end
 
   def icon_animate_classname(name)
