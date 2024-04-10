@@ -1,5 +1,6 @@
 require "mail"
 
+# rubocop:disable Style/ClassAndModuleChildren
 class Mail::Message
   attr_accessor :uid
 
@@ -19,3 +20,4 @@ class Mail::Message
     @authentication_field ||= header_fields.find { |field| field.name == "Authentication-Results" }
   end
 end
+# rubocop:enable Style/ClassAndModuleChildren
