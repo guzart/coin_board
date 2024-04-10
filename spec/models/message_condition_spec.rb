@@ -41,7 +41,7 @@ RSpec.describe MessageCondition, type: :model do
       object = double("Object")
       message_condition = build(:message_condition, :exactly_matches_subject, subject: "Welcome!")
 
-      expect(object).to receive(:condition_attribute).with("subject").and_return("Welcome!")
+      expect(object).to receive(:condition_attribute).with(:subject).and_return("Welcome!")
 
       expect(message_condition.satisfied_by?(object)).to be(true)
     end

@@ -38,9 +38,9 @@ RSpec.describe MessageConditionGroup, type: :model do
       )
 
       expect(object).to receive(:condition_attribute)
-        .with("subject").and_return("Welcome!")
+        .with(:subject).and_return("Welcome!")
       expect(object).to receive(:condition_attribute)
-        .with("body").and_return("Hello, we hope to see you soon!")
+        .with(:body).and_return("Hello, we hope to see you soon!")
 
       expect(condition_group.satisfied_by?(object)).to eq(true)
     end
