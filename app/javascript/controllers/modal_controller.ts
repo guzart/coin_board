@@ -7,7 +7,7 @@ const IDENTIFIER = "modal";
 export class ModalController extends ApplicationController {
   static identifier = IDENTIFIER;
 
-  private modal: Modal | undefined;
+  private modal?: Modal;
 
   connect() {
     this.modal = new Modal(this.element);

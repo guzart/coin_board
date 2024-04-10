@@ -9,7 +9,7 @@ export class DropdownButtonController extends ApplicationController {
   static targets = ["toggle"];
   declare readonly toggleTarget: HTMLElement;
 
-  private dropdown: Dropdown | undefined;
+  private dropdown?: Dropdown;
 
   connect() {
     this.toggleTarget.setAttribute("data-bs-toggle", "dropdown");

@@ -6,7 +6,7 @@ const IDENTIFIER = "collapse";
 export class CollapseController extends Controller {
   static identifier = IDENTIFIER;
 
-  private collapse: Collapse | undefined;
+  private collapse?: Collapse;
 
   connect() {
     const target = this.target;
