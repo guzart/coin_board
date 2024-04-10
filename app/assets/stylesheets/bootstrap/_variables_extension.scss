@@ -1,12 +1,13 @@
-$font-sizes: map-merge(
+@use "sass:map";
+
+$font-sizes: map.merge(
   $font-sizes,
   (
     xs: 0.75rem,
     sm: 0.875rem
   )
 );
-
-$spacers: map-merge(
+$spacers: map.merge(
   $spacers,
   (
     1\.5: $spacer * 0.375,
