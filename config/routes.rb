@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :message_dispatchers, only: %i[index show create destroy]
+  resources :message_dispatchers, only: %i[index show create update destroy]
   resources :message_conditions, only: %i[create destroy]
   resources :transaction_value_extractors, only: %i[create destroy]
 
