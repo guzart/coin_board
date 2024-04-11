@@ -52,6 +52,14 @@ class Currency < ApplicationRecord
     custom? ? name : (Money::Currency.find(iso_code)&.name || iso_code)
   end
 
+  def parse_amount(amount)
+    details_cache = details
+    value = amount.gsub(details_cache[:thousands_separator], "")
+                  .gsub(details_cache[:decimal_mark], ".")
+                  .gsub(/[^0-9.]/, "")
+    BigDecimal(value)
+  end
+
   private
 
   def details_from_money_currency
