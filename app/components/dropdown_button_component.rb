@@ -47,8 +47,12 @@ class DropdownButtonComponent < ApplicationComponent
       li[class=class_name]
         - if divider
           hr.dropdown-divider
-        - else
+        - elsif href.present?
           = link_to href, class: "dropdown-item", data: do
+            => helpers.icon(icon) if icon
+            = label
+        - else
+          = button_tag label, class: "dropdown-item", type: "button", data: do
             => helpers.icon(icon) if icon
             = label
     SLIM
