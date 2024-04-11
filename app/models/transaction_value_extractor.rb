@@ -31,12 +31,14 @@ class TransactionValueExtractor < ApplicationRecord
   validates :field, presence: true, uniqueness: { scope: :message_dispatcher_id }
 
   def extract(content, currency:)
-    regex = Regexp.new extraction_value
-    value = regex.match(content).captures.first
-    return value unless amount?
+    regex = Regexp.new(extraction_value)
+    match = regex.match(content)
+    return nil if match.blank?
 
-    value = value.gsub(currency.decimal_mark, ".").gsub(currency.thousands_separator, "")
-    BigDecimal(value)
+    value = match.captures.first
+    return nil if value.blank?
+
+    amount? ? currency.parse_amount(value) : value
   end
 
   def to_s
