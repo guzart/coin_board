@@ -22,7 +22,7 @@ div
           .text-truncate
             = message.subject || "[No subject]"
             span.text-xs.text-secondary.mx-4 = message.created_at
-            = render StatusBadgeComponent.new(message.status)
+            = render StatusBadgeComponent.new(message.status.humanize)
         - acc_item.with_body do
           = sanitize message.body
 
