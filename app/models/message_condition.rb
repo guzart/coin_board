@@ -35,7 +35,7 @@ class MessageCondition < ApplicationRecord
   comparison_operator :begins_with, ->(operand) { operand.start_with?(comparison_value) }
   comparison_operator :contains, ->(operand) { operand.include?(comparison_value) }
   comparison_operator :ends_with, ->(operand) { operand.end_with?(comparison_value) }
-  comparison_operator :exactly_matches, ->(operand) { operand == comparison_value }
+  comparison_operator :exactly_matches, :evaluate_exactly_matches_comparison
   comparison_operator :matches_regex, ->(operand) { operand.match?(comparison_value) }
 
   validates :comparison_attribute, presence: true
@@ -58,5 +58,10 @@ class MessageCondition < ApplicationRecord
 
   def comparison_value_or_sender
     sender_comparison? ? sender : comparison_value
+  end
+
+  def evaluate_exactly_matches_comparison(operand)
+    right_operand = sender_comparison? ? sender_id : comparison_value
+    operand == right_operand
   end
 end
