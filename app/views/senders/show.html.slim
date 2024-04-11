@@ -6,7 +6,10 @@ div
   br
   = render sender_status_badge(@sender)
 
-h3.h4.mt-8 Messages
+.d-flex.justify-content-between.align-items-center.mt-8.mb-4
+  h3.h4 Messages
+  div
+    = render ButtonComponent.new("Dispatch", outline: true, size: :sm, href: dispatch_messages_sender_path(@sender), data: { turbo_method: :post })
 
 - if @sender.messages.empty?
   p No messages found.

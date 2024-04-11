@@ -14,4 +14,9 @@ class SendersController < ApplicationController
     @sender.block!
     redirect_to senders_path
   end
+
+  def dispatch_messages
+    @sender.dispatch_messages
+    redirect_to sender_path(@sender)
+  end
 end

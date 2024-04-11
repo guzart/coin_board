@@ -46,6 +46,10 @@ class Sender < ApplicationRecord
     messages.destroy_all
   end
 
+  def dispatch_messages
+    enqueue_dispatch_message_jobs
+  end
+
   def to_s
     "#{name} <#{email}>"
   end
@@ -53,7 +57,7 @@ class Sender < ApplicationRecord
   private
 
   def enqueue_dispatch_message_jobs
-    dispatch_messages_jobs = messages.map { |m| DispatchMessageJob.new(m) }
+    dispatch_messages_jobs = messages.waiting_dispatch.map { |m| DispatchMessageJob.new(m) }
     ActiveJob.perform_all_later(dispatch_messages_jobs)
   end
 

@@ -39,6 +39,7 @@ class Message < ApplicationRecord
   enum status: %i[pending no_dispatcher dispatched]
 
   scope :expired, -> { dispatched.where("updated_at < ?", 2.days.ago) }
+  scope :waiting_dispatch, -> { where(status: %i[pending no_dispatcher]) }
 
   attribute_for_condition :body
   attribute_for_condition :subject
