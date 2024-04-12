@@ -44,6 +44,7 @@ class User < ApplicationRecord
   has_one :mailbox, dependent: :destroy
   has_many :currencies, dependent: :destroy
   has_many :message_dispatchers, dependent: :destroy
+  has_many :providers, dependent: :destroy
 
   after_create :create_mailbox
 

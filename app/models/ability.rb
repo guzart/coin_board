@@ -31,6 +31,7 @@ class Ability
 
     can :manage, User, id: user.id
     can(:manage, Currency, user:)
+    can(:manage, Provider, user:)
     can(:manage, Mailbox, user:)
     can :manage, Sender, mailbox: { user: }
     can :manage, Message, sender: { mailbox: { user: } }

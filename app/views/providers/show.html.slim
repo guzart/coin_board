@@ -1,0 +1,5 @@
+h2
+  = @provider.name
+
+-if @provider.oauth_capability? && !@provider.oauth_credentials?
+  = render ButtonComponent.new @provider.oauth_button_label, href: @oauth_authorize_url

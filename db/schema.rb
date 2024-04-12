@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_08_164018) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_12_043652) do
   create_table "currencies", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name"
@@ -92,6 +92,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_164018) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
+  create_table "providers", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name"
+    t.json "settings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_providers_on_user_id"
+  end
+
   create_table "senders", force: :cascade do |t|
     t.integer "mailbox_id", null: false
     t.string "name"
@@ -147,6 +156,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_164018) do
   add_foreign_key "message_dispatchers", "currencies"
   add_foreign_key "message_dispatchers", "users"
   add_foreign_key "messages", "senders"
+  add_foreign_key "providers", "users"
   add_foreign_key "senders", "mailboxes"
   add_foreign_key "transaction_value_extractors", "message_dispatchers"
 end

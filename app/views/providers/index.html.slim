@@ -1,0 +1,19 @@
+.mb-4.d-flex.column-gap-2
+  = render toggle_modal_button(t('helpers.submit.create', model: Provider.model_name.human),
+                               selector: "#new_provider_modal")
+
+- if @providers.empty?
+  p No providers
+- else
+  = render ListGroupComponent.new do |lg|
+    - @providers.each do |provider|
+      - lg.with_item do
+        .d-flex.align-items-center.justify-content-between
+          div = provider.name
+          div
+            = render ButtonComponent.new "View", href: provider_path(provider), size: :sm, outline: true, class: "me-4"
+            = render ButtonComponent.new "Delete", **delete_button_options_for(provider), size: :sm, outline: true, icon: :delete
+
+
+= render ModalComponent.new id: "new_provider_modal" do |modal|
+  = render 'form', provider: Provider.new

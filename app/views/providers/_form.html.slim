@@ -1,0 +1,4 @@
+/# locals: (provider:)
+= simple_form_for provider do |f|
+  = f.input :name, collection: Provider.available_names
+  = f.button :submit

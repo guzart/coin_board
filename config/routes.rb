@@ -4,8 +4,15 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: %i[show]
+
   resources :currencies, only: %i[index create destroy]
   resources :mailbox, only: %i[show]
+  resources :providers, only: %i[index show create destroy] do
+    collection do
+      get :oauth_callback
+    end
+  end
+
   resources :senders, only: %i[index show] do
     member do
       post :approve

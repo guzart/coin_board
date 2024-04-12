@@ -124,7 +124,14 @@ GEM
     diff-lcs (1.5.1)
     dotenv (3.1.0)
     drb (2.2.1)
+    dry-core (1.0.1)
+      concurrent-ruby (~> 1.0)
+      zeitwerk (~> 2.6)
     dry-initializer (3.1.1)
+    dry-monads (1.6.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
     e2mmap (0.1.0)
     error_highlight (0.6.0)
     erubi (1.12.0)
@@ -137,6 +144,9 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
@@ -171,6 +181,7 @@ GEM
     money (6.19.0)
       i18n (>= 0.6.4, <= 2)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     mutex_m (0.2.0)
     net-imap (0.4.10)
       date
@@ -396,9 +407,11 @@ DEPENDENCIES
   devise (~> 4.9)
   dotenv
   dry-initializer
+  dry-monads
   error_highlight (>= 0.4.0)
   factory_bot_rails
   faker
+  httparty
   jbuilder
   jsbundling-rails
   mail
