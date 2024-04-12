@@ -7,19 +7,6 @@ class ProvidersController < ApplicationController
 
   def index; end
 
-  def oauth_callback
-    state = fetch_state_from_session
-    provider = Provider.find(state["id"])
-    authorize! :edit, provider
-
-    result = provider.oauth_authorize!(code: params[:code], state: params[:state])
-    if result.success?
-      redirect_to provider_path(provider), notice: "Connected to #{provider.name}"
-    else
-      redirect_to provider_path(provider), alert: result.failure
-    end
-  end
-
   def show
     state = Base64.urlsafe_encode64(JSON.generate(id: @provider.id, nonce: SecureRandom.hex(8)))
     session[OAUTH_STATE_SESSION_KEY] = state
@@ -37,6 +24,19 @@ class ProvidersController < ApplicationController
     redirect_to providers_path, status: :see_other
   end
 
+
+  def oauth_callback
+    state = fetch_state_from_session
+    provider = Provider.find(state["id"])
+    authorize! :edit, provider
+
+    result = provider.oauth_authorize!(code: params[:code], state: params[:state])
+    if result.success?
+      redirect_to provider_path(provider), notice: "Connected to #{provider.name}"
+    else
+      redirect_to provider_path(provider), alert: result.failure
+    end
+  end
   private
 
   def fetch_state_from_session

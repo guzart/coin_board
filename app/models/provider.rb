@@ -18,16 +18,18 @@
 #  user_id  (user_id => users.id)
 #
 class Provider < ApplicationRecord
+  include ProviderOauth
+
   belongs_to :user
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
 
   def provider_class
-    @provider_class ||= Providers.const_get(name.capitalize)
+    @provider_class ||= Providers.const_get(name.capitalize) if name.present?
   end
 
   def provider_instance
-    @provider_instance ||= provider_class.new(settings || {})
+    @provider_instance ||= provider_class.new(settings || {}) if provider_class
   end
 
   def respond_to_missing?(method_name, include_private = false)
